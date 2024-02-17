@@ -1,27 +1,24 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
     <main>
-        <div class="top-row px-4">
-            <div class="nav-item px-3">
+        <div class="top-row justify-content-start" >
+            <div class="nav-item">
+                <span class="title">Academia Sevilla Este</span>
+            </div>
+            <div class="nav-item">
                 <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Inicio
+                    <span class="button" aria-hidden="true"></span> Inicio
                 </NavLink>
             </div>
-            <div class="nav-item px-3">
+            <div class="nav-item">
                 <NavLink class="nav-link" href="/form" Match="NavLinkMatch.All">
-                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Matrícula
+                    < class="button" aria-hidden="true"></> Matrícula
                 </NavLink>
             </div>
-
-
         </div>
-
-        <article class="content px-4">
+        <article class="container">
             @Body
         </article>
     </main>
