@@ -1,0 +1,35 @@
+﻿body {
+    background-image: url(https://img.freepik.com/foto-gratis/diversos-ninos-leyendo-libros_53876-146406.jpg?w=740&t=st=1709994025~exp=1709994625~hmac=49223c53f2549a841d00f96eefcfc195d8bd13655472c977675f96f2ded9efbb);
+    font-family: sans-serif;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu {
+    width: 80%;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    max-width: 500px;
+    opacity: 0.9;
+    border-radius: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+a, h3 {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px;
+    padding: 4px;
+}
+
+h4 {
+    text-align:center;
+}

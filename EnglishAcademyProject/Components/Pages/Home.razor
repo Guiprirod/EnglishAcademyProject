@@ -1,7 +1,58 @@
 ﻿@page "/"
+@using Havit.Blazor.Components.Web.Bootstrap
+@using EnglishAcademyProject.Components.Class
+
 
 <PageTitle>Inicio</PageTitle>
+<div class="cointaner" style="padding-top:5rem;">
+    <div class="menu">
+        <main>
+            <h1>Matrícula Abierta</h1>
+            <h1>2024/2025</h1>
+            <h3><a href="https://www.google.com/maps/place/Helen+Doron+English+Sevilla+Este/37.3967957,-5.9223138,17z/data=!3m1!4b1!4m6!3m5!1s0xd126f37a0415b1d:0xbd93e08a33646bf9!8m2!3d37.3967957!4d-5.9223138!16s%2Fg%2F1pp2vmy5m?entry=ttu target="_blank">Localización</a></h3>
 
-<h1>Hello, world!</h1>
+            <hr>
+            <section>
+                <h4>Seleccione el curso</h4>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <HxSelect TItem="OfficialCourses"
+                                  TValue="int?"
+                                  Data="data"
+                                  @bind-Value="courseId"
+                                  TextSelector="@(x => x.Name)"
+                                  ValueSelector="@(x => x.ID)"
+                                  Nullable="true"
+                                  NullText="-Seleccione un curso-"
+                                  NullDataText="Cargando cursos..." />
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h1><HxButton Text="Continuar" Color="ThemeColor.Primary" ></HxButton></h1>
+            </section>
 
-Welcome to your new app.
+        </main>
+    </div>
+</div>
+
+@code {
+    private List<OfficialCourses> data;
+    private int? courseId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Crear un mock de datos
+        data = new List<OfficialCourses>
+        {
+            new OfficialCourses { ID = 1, Name = "Alphaboat" },
+            new  OfficialCourses{ ID = 2, Name = "Nat and Friends" },
+            new OfficialCourses { ID = 3, Name = "It's a Baby Dragon" }
+            // Agrega más elementos según sea necesario
+        };
+
+
+    }
+
+
+}
