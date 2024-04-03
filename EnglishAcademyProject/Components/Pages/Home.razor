@@ -1,6 +1,10 @@
 ﻿@page "/"
 @using Havit.Blazor.Components.Web.Bootstrap
 @using EnglishAcademyProject.Components.Class
+@rendermode InteractiveServer
+
+@inject NavigationManager navigationManager
+
 
 
 <PageTitle>Inicio</PageTitle>
@@ -29,30 +33,11 @@
                 </div>
             </section>
             <section>
-                <h1><HxButton Text="Continuar" Color="ThemeColor.Primary" ></HxButton></h1>
+                <h1><HxButton Text="Continuar" Color="ThemeColor.Primary" OnClick="GoToForm"></HxButton></h1>
             </section>
 
         </main>
     </div>
 </div>
 
-@code {
-    private List<OfficialCourses> data = new List<OfficialCourses>();
-    private int? courseId;
 
-    protected override async Task OnInitializedAsync()
-    {
-        // Crear un mock de datos
-        data = new List<OfficialCourses>
-        {
-            new OfficialCourses { ID = 1, Name = "Alphaboat" },
-            new  OfficialCourses{ ID = 2, Name = "Nat and Friends" },
-            new OfficialCourses { ID = 3, Name = "It's a Baby Dragon" }
-            // Agrega más elementos según sea necesario
-        };
-
-
-    }
-
-
-}

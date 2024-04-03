@@ -1,9 +1,68 @@
 ﻿@page "/form"
+@using Havit.Blazor.Components.Web.Bootstrap
+@using EnglishAcademyProject.Components.Class
+@rendermode InteractiveServer
 
 <PageTitle>Matrícula</PageTitle>
 
-<h3>Matricula</h3>
+<div class="wrapper option-1 option-1-1">
+    <ol class="c-stepper">
+        <li class="c-stepper__item">
+            <h3 class="c-stepper__title">Datos del Curso</h3>
+            @*             <p class="c-stepper__desc">Some desc text</p>
+            *@
+        </li>
+        <li class="c-stepper__item">
+            <h3 class="c-stepper__title">Datos de Contacto</h3>
+            @*             <p class="c-stepper__desc">Some desc text</p>
+            *@
+        </li>
+        <li class="c-stepper__item">
+            <h3 class="c-stepper__title">Datos de Interés</h3>
+            @*             <p class="c-stepper__desc">Some desc text</p>
+            *@
+        </li>
+        <li class="c-stepper__item">
+            <h3 class="c-stepper__title">Datos Bancarios</h3>
+            @*             <p class="c-stepper__desc">Some desc text</p>
+            *@
+        </li>
+    </ol>
+</div>
 
-@code {
+<div class="cointaner" style="padding-top:5rem;">
+    <div class="menu">
+        <div class="row">
+            <div class="col-sm-12">
+                <HxInputText Label="Nombre del hijo/a a matricular" @bind-Value="@form.sonsName"></HxInputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento" @bind-Value="@form.sonsBirthday" />
+            </div>
+            <div class="col-sm-6">
+                <HxInputText Label="Curso Escolar" @bind-Value="@form.schoolYear"></HxInputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <HxInputText Label="Día de Preferencia" @bind-Value="@form.preferenceDay"></HxInputText>
+            </div>
+            <div class="col-sm-6">
+                <HxInputText Label="Hora de Preferencia" @bind-Value="@form.preferenceSchedule"></HxInputText>
 
-}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <HxCheckbox Label="¿Su hijo/a tiene que pagar matrícula?" @bind-Value="@form.paid"></HxCheckbox>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
