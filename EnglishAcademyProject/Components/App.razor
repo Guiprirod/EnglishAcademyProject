@@ -16,19 +16,26 @@
     <!-- Blazor CSS Isolation -->
     <link href="EnglishAcademyProject.styles.css" rel="stylesheet" />
 
-	<link rel="stylesheet" href="app.css" />
-	<link rel="stylesheet" href="menu.css" />
-	<link rel="stylesheet" href="form.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="menu.css" />
+    <link rel="stylesheet" href="form.css" />
+    <link rel="stylesheet" href="bs-stepper.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js">
 
-	<HeadOutlet />
+
+    <HeadOutlet />
 </head>
 
 <body>
     <Routes />
+    <script src="bs-stepper.min.js"></script>
 
     <script src="_framework/blazor.web.js"></script>
-	<!-- JavaScript Bundle with Popper -->
-	@((MarkupString)HxSetup.RenderBootstrapJavaScriptReference())
+    <!-- JavaScript Bundle with Popper -->
+    @((MarkupString)HxSetup.RenderBootstrapJavaScriptReference())
 </body>
 
 </html>

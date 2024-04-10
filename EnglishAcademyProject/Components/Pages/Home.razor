@@ -2,6 +2,8 @@
 @using Havit.Blazor.Components.Web.Bootstrap
 @using EnglishAcademyProject.Components.Class
 @rendermode InteractiveServer
+@using static System.String;
+
 
 @inject NavigationManager navigationManager
 
@@ -39,5 +41,17 @@
         </main>
     </div>
 </div>
+
+<HxModal @ref="noSelectedCourse" Centered="true">
+    <HeaderTemplate>
+        Curso no encontrado
+    </HeaderTemplate>
+    <BodyTemplate>
+        <HxAlert Color="ThemeColor.Danger">Por favor, revise que ha seleccionado un curso previamente antes de continuar.</HxAlert>
+    </BodyTemplate>
+    <FooterTemplate>
+        <HxButton Text="Close" OnClick=" () => noSelectedCourse.HideAsync()" Color="ThemeColor.Primary" />
+    </FooterTemplate>
+</HxModal>
 
 

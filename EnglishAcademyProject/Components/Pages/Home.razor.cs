@@ -1,4 +1,5 @@
 ﻿using EnglishAcademyProject.Components.Class;
+using Havit.Blazor.Components.Web.Bootstrap;
 
 namespace EnglishAcademyProject.Components.Pages
 {
@@ -6,24 +7,36 @@ namespace EnglishAcademyProject.Components.Pages
     {
         private List<OfficialCourses> data = new List<OfficialCourses>();
         private int? courseId;
+        private string nameCourse;
+        private HxModal? noSelectedCourse;
+
 
         protected override async Task OnInitializedAsync()
         {
             // Crear un mock de datos
-            data = new List<OfficialCourses>
-        {
-            new OfficialCourses { ID = 1, Name = "Alphaboat" },
-            new OfficialCourses{ ID = 2, Name = "Nat and Friends" },
-            new OfficialCourses { ID = 3, Name = "It's a Baby Dragon" }
-            // Agrega más elementos según sea necesario
-        };
+            var miMock = new Mock.Mock();
+
+            data = miMock.Prueba();
 
 
         }
-        public void GoToForm()
+        public async void GoToForm()
         {
+            var nullableCourseId = courseId.ToString();
 
-            navigationManager.NavigateTo("form");
+            foreach (var course in data)
+            {
+                if(course == data.FirstOrDefault( x => x.ID == courseId))
+                {
+                    nameCourse= course.Name;
+                }
+            }
+            if (nullableCourseId != "")
+                navigationManager.NavigateTo($"form/{courseId.ToString()}/{nameCourse}", true);
+            //navigationManager.NavigateTo("form");
+            else
+                await noSelectedCourse.ShowAsync();
+
         }
 
     }

@@ -1,68 +1,262 @@
-﻿@page "/form"
+﻿@page "/form/{CourseId}/{NameCourse}"
 @using Havit.Blazor.Components.Web.Bootstrap
 @using EnglishAcademyProject.Components.Class
+@inject NavigationManager navigationManager
+
 @rendermode InteractiveServer
 
 <PageTitle>Matrícula</PageTitle>
+<div class="container" style="padding-top:2rem;">
+    <div class="bs-stepper">
+        <div class="bs-stepper-header" role="tablist">
+            <!-- your steps here -->
+            <div class="step" data-target="#logins-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+                    @if (stepForm == 0 || stepForm == 1 || stepForm == 2 || stepForm == 3)
+                    {
+                        <span class="bs-stepper-circle-selected ">1</span>
 
-<div class="wrapper option-1 option-1-1">
-    <ol class="c-stepper">
-        <li class="c-stepper__item">
-            <h3 class="c-stepper__title">Datos del Curso</h3>
-            @*             <p class="c-stepper__desc">Some desc text</p>
-            *@
-        </li>
-        <li class="c-stepper__item">
-            <h3 class="c-stepper__title">Datos de Contacto</h3>
-            @*             <p class="c-stepper__desc">Some desc text</p>
-            *@
-        </li>
-        <li class="c-stepper__item">
-            <h3 class="c-stepper__title">Datos de Interés</h3>
-            @*             <p class="c-stepper__desc">Some desc text</p>
-            *@
-        </li>
-        <li class="c-stepper__item">
-            <h3 class="c-stepper__title">Datos Bancarios</h3>
-            @*             <p class="c-stepper__desc">Some desc text</p>
-            *@
-        </li>
-    </ol>
-</div>
+                    }
+                    <span class="bs-stepper-label">Datos del Curso</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#information-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                    @if (stepForm == 0)
+                    {
+                        <span class="bs-stepper-circle">2</span>
 
-<div class="cointaner" style="padding-top:5rem;">
-    <div class="menu">
-        <div class="row">
-            <div class="col-sm-12">
-                <HxInputText Label="Nombre del hijo/a a matricular" @bind-Value="@form.sonsName"></HxInputText>
+                    }
+                    @if (stepForm == 1 || stepForm == 2 || stepForm == 3)
+                    {
+                        <span class="bs-stepper-circle-selected">2</span>
+                    }
+                    <span class="bs-stepper-label">Datos de Contacto</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#information-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                    @if (stepForm == 0 || stepForm == 1)
+                    {
+                        <span class="bs-stepper-circle">3</span>
+
+                    }
+                    @if (stepForm == 2 || stepForm == 3)
+                    {
+                        <span class="bs-stepper-circle-selected">3</span>
+                    }
+                    <span class="bs-stepper-label">Datos de Interés</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#information-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                    @if (stepForm == 0 || stepForm == 1 || stepForm == 2)
+                    {
+                        <span class="bs-stepper-circle">3</span>
+
+                    }
+                    @if (stepForm == 3)
+                    {
+                        <span class="bs-stepper-circle-selected">3</span>
+                    }
+                    <span class="bs-stepper-label">Datos Bancarios</span>
+                </button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento" @bind-Value="@form.sonsBirthday" />
-            </div>
-            <div class="col-sm-6">
-                <HxInputText Label="Curso Escolar" @bind-Value="@form.schoolYear"></HxInputText>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <HxInputText Label="Día de Preferencia" @bind-Value="@form.preferenceDay"></HxInputText>
-            </div>
-            <div class="col-sm-6">
-                <HxInputText Label="Hora de Preferencia" @bind-Value="@form.preferenceSchedule"></HxInputText>
 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <HxCheckbox Label="¿Su hijo/a tiene que pagar matrícula?" @bind-Value="@form.paid"></HxCheckbox>
-
-
-            </div>
-        </div>
     </div>
 </div>
+
+<div class="cointaner" style="padding-top:2rem;">
+    <div class="menu">
+        <div class="main">
+            <h1 style="text-align:center;padding:1rem;">@mainTitle </h1>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h5 style="text-align:center">Curso seleccionado </h5>
+
+                    <HxInputText @bind-Value="@selectedCourse" Enabled="false" ></HxInputText>
+                </div>
+                <div class="col-sm-6">
+                    <h5 style="text-align:center">Precio del curso </h5>
+
+                    <HxInputNumber TValue="int" @bind-Value="@price" Enabled="false">tfgh</HxInputNumber>
+
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        <div class="section">
+            @if (stepForm == 0)
+            {
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:center;">
+                        <HxInputText Label="Nombre del hijo/a a matricular" @bind-Value="@form.sonsName"></HxInputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento" @bind-Value="@form.sonsBirthday" />
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Curso Escolar" @bind-Value="@form.schoolYear" Placeholder="2024/2025"></HxInputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Día de Preferencia" @bind-Value="@form.preferenceDay" Placeholder="A confirmar por el centro"></HxInputText>
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Hora de Preferencia" @bind-Value="@form.preferenceSchedule" Placeholder="A confirmar por el centro"></HxInputText>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-12">
+                        <HxCheckbox Label="¿Su hijo/a tiene que pagar matrícula?" @bind-Value="@form.paid"></HxCheckbox>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-12">
+                        <HxSubmit Text="Siguiente" Color="ThemeColor.Primary" OnClick="() =>SendForm(form,0)"></HxSubmit>
+                    </div>
+                </div>
+            }
+            @if (stepForm == 1)
+            {
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:center;">
+                        <HxInputText Label="Nombre del hijo/a a matricular" @bind-Value="@form.sonsName"></HxInputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento" @bind-Value="@form.sonsBirthday" />
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Curso Escolar" @bind-Value="@form.schoolYear" Placeholder="2024/2025"></HxInputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Día de Preferencia" @bind-Value="@form.preferenceDay" Placeholder="A confirmar por el centro"></HxInputText>
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Hora de Preferencia" @bind-Value="@form.preferenceSchedule" Placeholder="A confirmar por el centro"></HxInputText>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-12">
+                        <HxCheckbox Label="¿Su hijo/a tiene que pagar matrícula?" @bind-Value="@form.paid"></HxCheckbox>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-6">
+                        <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,1)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
+                    </div>
+                    <div class="col-sm-6">
+                        <HxSubmit Text="Siguiente" Color="ThemeColor.Primary" OnClick="() =>SendForm(form,1)" Icon="BootstrapIcon.ArrowRight"></HxSubmit>
+                    </div>
+                </div>
+
+            }
+            @if (stepForm == 2)
+            {
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:center;">
+                        <HxInputText Label="Nombre del hijo/a a matricular" @bind-Value="@form.sonsName"></HxInputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento" @bind-Value="@form.sonsBirthday" />
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Curso Escolar" @bind-Value="@form.schoolYear" Placeholder="2024/2025"></HxInputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Día de Preferencia" @bind-Value="@form.preferenceDay" Placeholder="A confirmar por el centro"></HxInputText>
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Hora de Preferencia" @bind-Value="@form.preferenceSchedule" Placeholder="A confirmar por el centro"></HxInputText>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-12">
+                        <HxCheckbox Label="¿Su hijo/a tiene que pagar matrícula?" @bind-Value="@form.paid"></HxCheckbox>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-6">
+                        <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,2)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
+                    </div>
+                    <div class="col-sm-6">
+                        <HxSubmit Text="Siguiente" Color="ThemeColor.Primary" OnClick="() =>SendForm(form,2)" Icon="BootstrapIcon.ArrowRight"></HxSubmit>
+                    </div>
+                </div>
+
+            }
+            @if (stepForm == 3)
+            {
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:center;">
+                        <HxInputText Label="Nombre del hijo/a a matricular" @bind-Value="@form.sonsName"></HxInputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento" @bind-Value="@form.sonsBirthday" />
+                    </div>
+                    <div class="col-sm-6">
+                        <HxInputText Label="Curso Escolar" @bind-Value="@form.schoolYear" Placeholder="2024/2025"></HxInputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <HxInputText Label="Día de Preferencia" @bind-Value="@form.preferenceDay" Placeholder="A confirmar por el centro"></HxInputText>
+                    </div>
+                    <div class="col-sm-6">
+                        <HxInputText Label="Hora de Preferencia" @bind-Value="@form.preferenceSchedule" Placeholder="A confirmar por el centro"></HxInputText>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-12">
+                        <HxCheckbox Label="¿Su hijo/a tiene que pagar matrícula?" @bind-Value="@form.paid"></HxCheckbox>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-sm-6">
+                        <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,3)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
+                    </div>
+                    <div class="col-sm-6">
+                        <HxSubmit Text="Siguiente" Color="ThemeColor.Primary" OnClick="() =>SendForm(form,3)" Icon="BootstrapIcon.ArrowRight"></HxSubmit>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
 
 
 
