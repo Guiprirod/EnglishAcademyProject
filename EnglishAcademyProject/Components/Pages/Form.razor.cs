@@ -16,7 +16,7 @@ namespace EnglishAcademyProject.Components.Pages
         private List<OfficialCourses> data = new List<OfficialCourses>();
         private int stepForm = new int();
         private string? selectedCourse;
-        private int price;
+        private string price;
         private string? mainTitle = "Datos del Curso";
 
         protected override async Task OnInitializedAsync()
@@ -31,7 +31,7 @@ namespace EnglishAcademyProject.Components.Pages
             {
                 if (currentCourse == data.FirstOrDefault(x => x.ID.ToString() == CourseId))
                 {
-                    price = currentCourse.Price;
+                    price = currentCourse.Price.ToString() + "€";
                 }
             }
 

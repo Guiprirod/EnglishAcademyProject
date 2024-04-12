@@ -12,7 +12,7 @@
             <!-- your steps here -->
             <div class="step" data-target="#logins-part">
                 <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
-                    @if (stepForm == 0 || stepForm == 1 || stepForm == 2 || stepForm == 3)
+                    @if(stepForm == 0 || stepForm == 1 || stepForm == 2 || stepForm == 3)
                     {
                         <span class="bs-stepper-circle-selected ">1</span>
 
@@ -23,12 +23,12 @@
             <div class="line"></div>
             <div class="step" data-target="#information-part">
                 <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                    @if (stepForm == 0)
+                    @if(stepForm == 0)
                     {
                         <span class="bs-stepper-circle">2</span>
 
                     }
-                    @if (stepForm == 1 || stepForm == 2 || stepForm == 3)
+                    @if(stepForm == 1 || stepForm == 2 || stepForm == 3)
                     {
                         <span class="bs-stepper-circle-selected">2</span>
                     }
@@ -38,12 +38,12 @@
             <div class="line"></div>
             <div class="step" data-target="#information-part">
                 <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                    @if (stepForm == 0 || stepForm == 1)
+                    @if(stepForm == 0 || stepForm == 1)
                     {
                         <span class="bs-stepper-circle">3</span>
 
                     }
-                    @if (stepForm == 2 || stepForm == 3)
+                    @if(stepForm == 2 || stepForm == 3)
                     {
                         <span class="bs-stepper-circle-selected">3</span>
                     }
@@ -53,14 +53,14 @@
             <div class="line"></div>
             <div class="step" data-target="#information-part">
                 <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                    @if (stepForm == 0 || stepForm == 1 || stepForm == 2)
+                    @if(stepForm == 0 || stepForm == 1 || stepForm == 2)
                     {
-                        <span class="bs-stepper-circle">3</span>
+                        <span class="bs-stepper-circle">4</span>
 
                     }
-                    @if (stepForm == 3)
+                    @if(stepForm == 3)
                     {
-                        <span class="bs-stepper-circle-selected">3</span>
+                        <span class="bs-stepper-circle-selected">4</span>
                     }
                     <span class="bs-stepper-label">Datos Bancarios</span>
                 </button>
@@ -78,12 +78,12 @@
                 <div class="col-sm-6">
                     <h5 style="text-align:center">Curso seleccionado </h5>
 
-                    <HxInputText @bind-Value="@selectedCourse" Enabled="false" ></HxInputText>
+                    <HxInputText @bind-Value="@selectedCourse" Enabled="false"></HxInputText>
                 </div>
                 <div class="col-sm-6">
                     <h5 style="text-align:center">Precio del curso </h5>
 
-                    <HxInputNumber TValue="int" @bind-Value="@price" Enabled="false">tfgh</HxInputNumber>
+                    <HxInputText TValue="int" @bind-Value="@price" Enabled="false"></HxInputText>
 
                 </div>
             </div>
@@ -91,7 +91,7 @@
         </div>
         <hr>
         <div class="section">
-            @if (stepForm == 0)
+            @if(stepForm == 0)
             {
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
@@ -127,33 +127,57 @@
                     </div>
                 </div>
             }
-            @if (stepForm == 1)
+            @if(stepForm == 1)
             {
                 <div class="row">
-                    <div class="col-sm-12" style="text-align:center;">
-                        <HxInputText Label="Nombre del hijo/a a matricular" @bind-Value="@form.sonsName"></HxInputText>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Nombre y apellidos de madre/padre/tutor legal + '+'" @bind-Value="form.nameparent"></HxInputText>
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="NIF/NIE" @bind-Value="form.nationalId"></HxInputText>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6" style="text-align:center;">
-                        <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento" @bind-Value="@form.sonsBirthday" />
+                        <HxInputText Label="Nombre y apellidos de madre/padre/tutor legal" @bind-Value="form.nameparent2"></HxInputText>
                     </div>
                     <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Curso Escolar" @bind-Value="@form.schoolYear" Placeholder="2024/2025"></HxInputText>
+                        <HxInputText Label="NIF/NIE" @bind-Value="form.nationalId2"></HxInputText>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Día de Preferencia" @bind-Value="@form.preferenceDay" Placeholder="A confirmar por el centro"></HxInputText>
+                        <HxInputText Label="Teléfono madre/padre/tutor legal" @bind-Value="form.phoneNumber"></HxInputText>
                     </div>
                     <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Hora de Preferencia" @bind-Value="@form.preferenceSchedule" Placeholder="A confirmar por el centro"></HxInputText>
+                        <HxInputText Label="Teléfono madre/padre/tutor legal" @bind-Value="form.phoneNumber2"></HxInputText>
 
                     </div>
                 </div>
-                <div class="row" style="text-align:center">
-                    <div class="col-sm-12">
-                        <HxCheckbox Label="¿Su hijo/a tiene que pagar matrícula?" @bind-Value="@form.paid"></HxCheckbox>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Correo electronico" @bind-Value="form.email"></HxInputText>
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Correo electrónico 2" @bind-Value="form.email2"></HxInputText>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Direción" @bind-Value="form.address"></HxInputText>
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Ciudad" @bind-Value="form.city"></HxInputText>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Provincia" @bind-Value="form.province"></HxInputText>
+                    </div>
+                    <div class="col-sm-6" style="text-align:center;">
+                        <HxInputText Label="Código Postal" @bind-Value="form.cp"></HxInputText>
 
                     </div>
                 </div>
@@ -167,7 +191,7 @@
                 </div>
 
             }
-            @if (stepForm == 2)
+            @if(stepForm == 2)
             {
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
@@ -207,7 +231,7 @@
                 </div>
 
             }
-            @if (stepForm == 3)
+            @if(stepForm == 3)
             {
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
