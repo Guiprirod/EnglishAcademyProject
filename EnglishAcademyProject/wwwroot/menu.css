@@ -18,6 +18,16 @@
     opacity: 0.9;
     border-radius: 20px;
 }
+.prueba {
+    width: 80%;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    max-width: 390px;
+    opacity: 0.9;
+    border-radius: 20px;
+}
 
 h1 {
     text-align: center;

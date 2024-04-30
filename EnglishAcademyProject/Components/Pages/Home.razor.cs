@@ -16,7 +16,7 @@ namespace EnglishAcademyProject.Components.Pages
             // Crear un mock de datos
             var miMock = new Mock.Mock();
 
-            data = miMock.Prueba();
+            data = miMock.Courses();
 
 
         }

@@ -7,7 +7,7 @@ namespace EnglishAcademyProject.Components.Mock
     public class Mock
     {
 
-        public List<OfficialCourses> Prueba()
+        public List<OfficialCourses> Courses()
         {
 
             var data = new List<OfficialCourses>
@@ -19,5 +19,19 @@ namespace EnglishAcademyProject.Components.Mock
         };
             return data;
         }
+
+
+        public List<HowMeetUs> Vias()
+        {
+            var data = new List<HowMeetUs>
+            {
+                new HowMeetUs {via = "Amigo"},
+                new HowMeetUs {via = "Web"},
+                new HowMeetUs {via = "Prensa"},
+                new HowMeetUs {via = "Folletos / canal"},
+                new HowMeetUs {via = "Radio"}
+            };
+            return data;
+                }
     }
 }
