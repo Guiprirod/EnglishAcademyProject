@@ -34,3 +34,6 @@
 .form-control {
     text-align: center !important;
 }
+.icon {
+    vertical-align: bottom;
+}

@@ -25,11 +25,15 @@ namespace EnglishAcademyProject.Components.Pages
         private string? mainTitle = "Datos del Curso";
         private string? _labelParentName;
         private HxModal emptyForm;
+        private HxModal dataProcessingModal;
+        private HxModal additionalClausesModal;
         private string? method;
 
 
         protected override async Task OnInitializedAsync()
         {
+
+            form.additionalInformation = "";
             _labelParentName = "Nombre y apellidos de madre/padre/tutor legal *";
 
             var miMock = new Mock.Mock();
@@ -65,12 +69,7 @@ namespace EnglishAcademyProject.Components.Pages
             else if(pass == 3)
             {
                 stepForm = 2;
-                mainTitle = "Aceptación condiciones legales";
-            }
-            else if(pass == 4)
-            {
-                stepForm = 3;
-                mainTitle = "Datos Bancarios";
+                mainTitle = "Datos de interés y condiciones legales";
             }
             else
             {
@@ -96,7 +95,7 @@ namespace EnglishAcademyProject.Components.Pages
                 if(!System.String.IsNullOrEmpty(form.nameparent) && !System.String.IsNullOrEmpty(form.nationalId) && !System.String.IsNullOrEmpty(form.phoneNumber) && !System.String.IsNullOrEmpty(form.email) && !System.String.IsNullOrEmpty(form.address) && !System.String.IsNullOrEmpty(form.city) && !System.String.IsNullOrEmpty(form.province) && !System.String.IsNullOrEmpty(form.cp))
                 {
                     stepForm = 2;
-                    mainTitle = "Datos de Interés";
+                    mainTitle = "Datos de interés y condiciones legales";
                 }
                 else
                 {
@@ -106,24 +105,18 @@ namespace EnglishAcademyProject.Components.Pages
             }
             else if(pass == 2)
             {
-                stepForm = 3;
-                mainTitle = "Aceptación condiciones legales";
-            }
-            else if(pass == 3)
-            {
-                if(form.authorizationAdditionalClauses && form.authorizationDataProcessing)
+                if (form.authorizationAdditionalClauses && form.authorizationDataProcessing)
                 {
-                    stepForm = 4;
+                    stepForm = 3;
                     mainTitle = "Datos Bancarios";
                 }
                 else
                 {
                     await emptyForm.ShowAsync();
                 }
-
-
             }
-            else if(pass == 4)
+        
+            else if(pass == 3)
             {
                 SendEmail();
             }

@@ -11,7 +11,7 @@
         <!-- your steps here -->
         <div class="step" data-target="#logins-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
-                @if(stepForm == 0 || stepForm == 1 || stepForm == 2 || stepForm == 3 || stepForm == 4)
+                @if (stepForm == 0 || stepForm == 1 || stepForm == 2 || stepForm == 3)
                 {
                     <span class="bs-stepper-circle-selected ">1</span>
 
@@ -22,12 +22,12 @@
         <div class="line"></div>
         <div class="step" data-target="#information-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                @if(stepForm == 0)
+                @if (stepForm == 0)
                 {
                     <span class="bs-stepper-circle">2</span>
 
                 }
-                @if(stepForm == 1 || stepForm == 2 || stepForm == 3 || stepForm == 4)
+                @if (stepForm == 1 || stepForm == 2 || stepForm == 3)
                 {
                     <span class="bs-stepper-circle-selected">2</span>
                 }
@@ -37,49 +37,34 @@
         <div class="line"></div>
         <div class="step" data-target="#information-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                @if(stepForm == 0 || stepForm == 1)
+                @if (stepForm == 0 || stepForm == 1)
                 {
                     <span class="bs-stepper-circle">3</span>
 
                 }
-                @if(stepForm == 2 || stepForm == 3 || stepForm == 4)
+                @if (stepForm == 2 || stepForm == 3)
                 {
                     <span class="bs-stepper-circle-selected">3</span>
                 }
-                <span class="bs-stepper-label">Datos de Interés</span>
+                <span class="bs-stepper-label">Datos de Interés y condiciones legales</span>
             </button>
         </div>
         <div class="line"></div>
         <div class="step" data-target="#information-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                @if(stepForm == 0 || stepForm == 1 || stepForm == 2)
+                @if (stepForm == 0 || stepForm == 1 || stepForm == 2)
                 {
                     <span class="bs-stepper-circle">4</span>
 
                 }
-                @if(stepForm == 3 || stepForm == 4)
+                @if (stepForm == 3)
                 {
                     <span class="bs-stepper-circle-selected">4</span>
-                }
-                <span class="bs-stepper-label">Aceptación condiciones legales</span>
-            </button>
-        </div>
-        <div class="line"></div>
-
-        <div class="step" data-target="#information-part">
-            <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                @if(stepForm == 0 || stepForm == 1 || stepForm == 2 || stepForm == 3)
-                {
-                    <span class="bs-stepper-circle">5</span>
-
-                }
-                @if(stepForm == 4)
-                {
-                    <span class="bs-stepper-circle-selected">5</span>
                 }
                 <span class="bs-stepper-label">Datos Bancarios</span>
             </button>
         </div>
+
     </div>
 
 </div>
@@ -105,7 +90,7 @@
         </div>
         <hr>
         <div class="section">
-            @if(stepForm == 0)
+            @if (stepForm == 0)
             {
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
@@ -131,7 +116,7 @@
                 </div>
                 <div class="row" style="text-align:center">
                     <div class="col-sm-12">
-                        <HxCheckbox Label="¿Su hijo/a tiene que pagar matrícula? *" @bind-Value="@form.paid"></HxCheckbox>
+                        <HxCheckbox Text="¿Su hijo/a tiene que pagar matrícula? *" @bind-Value="@form.paid" Inline="true"></HxCheckbox>
 
                     </div>
                 </div>
@@ -141,7 +126,7 @@
                     </div>
                 </div>
             }
-            @if(stepForm == 1)
+            @if (stepForm == 1)
             {
                 <div class="row">
                     <div class="col-sm-6" style="text-align:center;">
@@ -205,32 +190,77 @@
                 </div>
 
             }
-            @if(stepForm == 2)
+            @if (stepForm == 2)
             {
                 <div class="row">
                     <div class="col-sm-6">
-                        <HxCheckbox Label="Mi hijo/a puede ir solo a casa *" @bind-Value="@form.goHome"></HxCheckbox>
+                        <HxIcon Icon="@BootstrapIcon.PersonWalking" CssClass="icon"></HxIcon>
+
+                        <HxCheckbox Text="Mi hijo/a puede ir solo a casa *" @bind-Value="@form.goHome" Inline="true"></HxCheckbox>
                     </div>
                     <div class="col-sm-6">
-                        <HxCheckbox Label="Mi hijo/a tiene alergias *" @bind-Value="@form.alergias"></HxCheckbox>
+                        <HxIcon Icon="@BootstrapIcon.PersonExclamation" CssClass="icon"></HxIcon>
+
+                        <HxCheckbox Text="Mi hijo/a tiene alergias *" @bind-Value="@form.alergias" Inline="true"></HxCheckbox>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:1rem !important;">
+                    <div class="col-sm-1" style="text-align:end">
+                        <HxIcon Icon="@BootstrapIcon.Whatsapp" CssClass="icon"></HxIcon>
+
+                    </div>
+
+                    <div class="col-sm-11">
+
+                        <HxCheckbox Text="Durante el curso queremos utilizar Whatsapp (listas de difusión) y email como herramienta de comunicacion para informarnos de actualizaciones y novedades en el curso de vuestros hijos, estoy de acuerdo: *" Inline="true" @bind-Value="@form.whatsapp"></HxCheckbox>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
-                        <HxCheckbox Label="Durante el curso queremos utilizar Whatsapp (listas de difusión) y email como herramienta de comunicacion para informarnos de actualizaciones y novedades en el curso de vuestros hijos, estoy de acuerdo: *" @bind-Value="@form.whatsapp"></HxCheckbox>
+                    <div class="col-sm-1" style="text-align:end">
+                        <HxIcon Icon="@BootstrapIcon.Camera" CssClass="icon"></HxIcon>
+
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <HxCheckbox Label="En ocasiones, es posible que durante el desarrollo de una clase, o en el marco de una fiesta fin de curso, navideña, etc., o una excursión, se tomen fotos de los niños. Estoy de acuerdo con que mi hijo/a pueda aparecer en estas fotos, y que éstas puedan estar colocadas en los tablones del Learning Centre, y en los perfiles de redes sociales: *" @bind-Value="@form.photos"></HxCheckbox>
+                    <div class="col-sm-11">
+
+                        <HxCheckbox Text="En ocasiones, es posible que durante el desarrollo de una clase, o en el marco de una fiesta fin de curso, navideña, etc., o una excursión, se tomen fotos de los niños. Estoy de acuerdo con que mi hijo/a pueda aparecer en estas fotos, y que éstas puedan estar colocadas en los tablones del Learning Centre, y en los perfiles de redes sociales: *" @bind-Value="@form.photos" Inline="true"></HxCheckbox>
                     </div>
 
                 </div>
                 <div class="row" style="text-align:center">
                     <div class="col-sm-12">
-                        <HxCheckbox Label="Acepto el envío de comunicaciones comerciales, tanto por la escuela como la franquiciadora *" @bind-Value="@form.commercialCommunications"></HxCheckbox>
+                        <HxCheckbox Text="Acepto el envío de comunicaciones comerciales, tanto por la escuela como la franquiciadora *" @bind-Value="@form.commercialCommunications" Inline="true"></HxCheckbox>
 
                     </div>
+                </div>
+                <div class="row" style="padding:1rem !important;">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxCheckbox @bind-Value="@form.authorizationDataProcessing"></HxCheckbox>
+
+                            </div>
+                            <div class="col-sm-11">
+                                <HxNavLink OnClick=" () => dataProcessingModal.ShowAsync()" Match="NavLinkMatch.Prefix">He leído y autorizo a realizar el tratamiento de datos descrito *</HxNavLink>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1" style="text-align:end;">
+                                <HxCheckbox @bind-Value="@form.authorizationAdditionalClauses"></HxCheckbox>
+
+                            </div>
+                            <div class="col-sm-11">
+                                <HxNavLink OnClick=" () => additionalClausesModal.ShowAsync()" Match="NavLinkMatch.Prefix">Acepto las cláusulas adicionales *</HxNavLink>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
                 </div>
                 <div class="row" style="text-align:center">
                     <h5>¿Cómo nos has conocido?</h5>
@@ -257,80 +287,49 @@
                 </div>
 
             }
-            @if(stepForm == 3)
+            @if (stepForm == 3)
             {
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
-                        <h5>Tratamientos de datos *</h5>
-                        <HxInputTextArea @bind-Value="@form.dataProcessing"></HxInputTextArea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12" style="text-align:center;">
-                        <h5>Cláusalas adicionales *</h5>
-                        <HxInputTextArea @bind-Value="@form.additionalClauses"></HxInputTextArea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <HxCheckbox Label="He leído y autorizo a realizar el tratamiento de datos arriba descrito *" @bind-Value="@form.authorizationDataProcessing"></HxCheckbox>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <HxCheckbox Label="Acepto las cláusulas adicionales *" @bind-Value="@form.authorizationAdditionalClauses"></HxCheckbox>
-
-                    </div>
-                </div>
-                <div class="row" style="text-align:center">
-                    <div class="col-sm-6">
-                        <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,3)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
-                    </div>
-                    <div class="col-sm-6">
-                        <HxSubmit Text="Siguiente" Color="ThemeColor.Primary" OnClick="() =>SendForm(form,3)" Icon="BootstrapIcon.ArrowRight"></HxSubmit>
-                    </div>
-                </div>
-
-            }
-            @if(stepForm == 4)
-            {
-                <div class="row">
-                    <div class="col-sm-12" style="text-align:center;">
-                        <h5>Información a tener en cuenta(situación familiar, etc.) *</h5>
+                        <h3>Información a tener en cuenta(situación familiar, etc.) *</h3>
                         <HxInputTextArea @bind-Value="@form.additionalInformation"></HxInputTextArea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
-                        <h5>Personas que pueden recoger de clase a mi hijo/a (nombre/parentesco) *</h5>
+                        <h3>Personas que pueden recoger de clase a mi hijo/a (nombre/parentesco) *</h3>
                         <HxInputTextArea @bind-Value="@form.morePeople"></HxInputTextArea>
-
+                        <br />
                         <h3><strong>Se ruega informar antes de la clase si alguien distinto de los padres/tutores legales pasará a recoger al/el menor)</strong></h3>
                     </div>
                 </div>
-                <div class="row">
-                    <h3>Método de pago *</h3>
+                <div class="row" style="padding-top:1rem;">
+                    <br>
+                    <h2>Método de pago</h2>
+                    <hr>
+
                     <div class="col-sm-4">
-                        <HxCheckbox Label="Pago Mensual" @bind-Value="form.monthlyPayment"></HxCheckbox>
+                        <HxCheckbox Text="Pago Mensual" @bind-Value="form.monthlyPayment" Inline=true></HxCheckbox>
                     </div><div class="col-sm-4">
-                        <HxCheckbox Label="Pago Trimestral (5% dto. por trimestre)" @bind-Value="form.quarterlyPayment"></HxCheckbox>
+                        <HxCheckbox Text="Pago Trimestral (5% dto. por trimestre)" @bind-Value="form.quarterlyPayment" Inline=true></HxCheckbox>
                     </div><div class="col-sm-4">
-                        <HxCheckbox Label="Pago Anual (10% dto. anual)" @bind-Value="form.annualPayment"></HxCheckbox>
+                        <HxCheckbox Text="Pago Anual (10% dto. anual)" @bind-Value="form.annualPayment" Inline=true></HxCheckbox>
                     </div>
                 </div>
-                <div class="row">
-                    <HxIcon Icon="@BootstrapIcon.CashCoin"></HxIcon><h3>Forma de pago</h3>
+                <div class="row" style="padding-top:1rem;">
+                    <br>
+                    <h2>Forma de pago</h2>
+                    <hr>
                     <div class="col-sm-6" style="text-align:center;">
-                        <HxCheckbox Label="Cargo a cuenta" @bind-Value="form.bank"></HxCheckbox>
+                        <HxCheckbox Text="Cargo a cuenta" @bind-Value="form.bank" Inline=true></HxCheckbox>
 
                     </div>
                     <div class="col-sm-6" style="text-align:center;">
-                        <HxCheckbox Label="Otro" @bind-Value="form.other"></HxCheckbox>
+                        <HxCheckbox Text="Otro" @bind-Value="form.other" Inline=true></HxCheckbox>
 
                     </div>
                 </div>
-                @if(form.bank)
+                @if (form.bank)
                 {
                     <div class="row">
                         <div class="col-sm-12">
@@ -347,16 +346,16 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <HxCheckbox Label="Acepto el aviso legal y la política de privacidad *" @bind-Value="@form.privacyPolicy"></HxCheckbox>
+                        <HxCheckbox Text="Acepto el aviso legal y la política de privacidad *" @bind-Value="@form.privacyPolicy" Inline=true></HxCheckbox>
                     </div>
                 </div>
 
                 <div class="row" style="text-align:center">
                     <div class="col-sm-6">
-                        <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,4)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
+                        <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,3)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
                     </div>
                     <div class="col-sm-6">
-                        <HxSubmit Text="Siguiente" Color="ThemeColor.Primary" OnClick="() =>SendForm(form,4)" Icon="BootstrapIcon.ArrowRight"></HxSubmit>
+                        <HxSubmit Text="Siguiente" Color="ThemeColor.Primary" OnClick="() =>SendForm(form,3)" Icon="BootstrapIcon.ArrowRight"></HxSubmit>
                     </div>
                 </div>
             }
@@ -366,6 +365,97 @@
 
     </div>
 </div>
+
+<HxModal @ref="dataProcessingModal" Centered="true" Size="ModalSize.ExtraLarge">
+    <HeaderTemplate>
+        <strong>
+            <h3>
+                Tratamiento de datos
+            </h3>
+        </strong>
+    </HeaderTemplate>
+    <BodyTemplate>
+        <span>
+            o Texto legal de Tratamiento de Datos:
+
+            Le informamos que las respuestas son obligatorias, estos datos serán utilizados para el buen funcionamiento de las clases, así como para la seguridad de los alumnos. La escuela asociada no asume responsabilidad ninguna en caso de no cumplimentar los datos solicitados o indicación de datos erróneos, incompletos o no actualizados.
+
+            PROTECCIÓN DATOS: Reglamento Europeo de Protección de Datos 2016/679 y Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales:
+
+            Responsables:
+
+            1. HELEN DORON EEDUCATIONAL GROUP LTD. Registration Number: 512538356
+
+            2. NOW IN ENGLISH S.L. / B91870295 / Calle Virgen De La Victoria, local 2, 41011 de Sevilla / andaluciaadmin@helendoron.com.
+
+            3. MARIA JOSE GONZALEZ MUÑOZ DNI: 48874162J
+
+            Fin del tratamiento: prestación de servicios de enseñanza de lengua inglesa, gestión administrativa y postventa, contable y fiscal de la escuela. Realizar encuestas.
+
+            Autoriza el envío de comunicaciones de nuestros cursos y el resto de servicios relacionados, por parte de nuestra escuela y de la franquiciadora.
+
+            Criterios de conservación de los datos: se conservarán hasta la finalización del contrato, y durante los plazos legalmente establecidos. Una vez finalizados, se suprimirán con medidas de seguridad adecuadas para garantizar la seudonimización de los datos o la destrucción total de los mismos.
+
+            Comunicación de los datos: Los datos no se cederán salvo que sea necesario para la realización del servicio o por obligación legal.
+
+            Derechos que asisten al Interesado:
+
+            - Derecho a retirar el consentimiento en cualquier momento.
+
+            - Derecho de acceso, rectificación, portabilidad y supresión de sus datos y a la limitación u oposición a su tratamiento.
+
+            - Derecho a presentar una reclamación ante la Autoridad de control (agpd.es) si considera que el tratamiento no se ajusta a la normativa vigente.
+
+            Datos de contacto para ejercer sus derechos:
+
+            Nombre del franquiciado. MARIA JOSE GONZALEZ MUÑOZ, C/ General Lozano (Las Tiendas) 12, Lucena
+            Email: lucena@helendoron.com
+
+            Para realizar el tratamiento de datos descrito, el Responsable del tratamiento necesita su autorización.
+        </span>
+    </BodyTemplate>
+    <FooterTemplate>
+        <HxButton Text="Confirmar" OnClick=" () => dataProcessingModal.HideAsync()" Color="ThemeColor.Primary" />
+    </FooterTemplate>
+</HxModal>
+<HxModal @ref="additionalClausesModal" Centered="true" Size="ModalSize.ExtraLarge">
+    <HeaderTemplate>
+        <strong>
+            <h3>
+                Cláusulas adicionales
+            </h3>
+        </strong>
+    </HeaderTemplate>
+    <BodyTemplate>
+        <span>
+            Cláusulas adicionales
+            1. La escucha de los audios de cada curso en casa es una parte integral del programa y, como tal, muy importante para el éxito del aprendizaje. Por lo tanto, los niños deben escuchar los audios correspondientes con regularidad (al menos 2 veces al día).
+            2. Si alguien distinto de los tutores legales pasará a recoger al menor, nos tendrá que informar antes de las clases.
+            3. Rogamos nos notifique lo más pronto posible, si su hijo/a ó Vd. (en el caso de acompañamiento) en alguna ocasión no pudiesen asistir al curso.
+            4. El Learning Centre determina la duración de las clases, en función de la edad de los niños.
+            5. En función de la organización del centro y de los horarios de las clases, el/la profesor/a puede variar de un curso a otro.
+            6. Las clases que no se pudiesen impartir en el día y hora fijada en el calendario de clases fijado al inicio del curso, ya sea por día festivo o no lectivo y/o por causas fortuitas o ajenas al Learning Center, serán recuperadas para la consecución exitosa del método y será comunicada oportunamente a los padres/tutores legales de los/as alumnos/as
+            7. No hay clases en días festivos, pero los recuperaremos según el calendario facilitado a principio de curso. Las vacaciones escolares de Navidad, la Semana Santa y la Feria de Sevilla no son semanas lectivas.
+            8. En caso de que las clases presenciales se vieran interrumpidas por causas ajenas a HD o su franquiciado/a, el curso continuará en modalidad on-line, mediante la plataforma digital que HD pondrá a disposición del/la alumno. La modalidad on-line del curso cuenta con los mismos estándares de calidad del presencial, y su continuación será obligatoria para poder alcanzar los objetivos propuestos; en caso de que se dé la circunstancia de interrupción prolongada de clases, por voluntad ajena a las partes, se continuará el curso on-line. Si, llegado el caso, el/la alumno/a tuviera problemas de conectividad de algún tipo, deberá hacérselo saber al centro, al objeto de poder buscar la solución, garantizándose en todo momento la privacidad de estas comunicaciones.
+            9. La matrícula se abonará de forma anticipada y no será reembolsable debido a que la misma cubre gastos necesarios para la planificación del año en base a los cursos previstos, y el número de plazas de los mismos. La empresa no podrá garantizar la plaza hasta que no se haya efectuado el pago de la matrícula.
+            10. El precio mensual para aproximadamente 36-38 clases en un curso escolar se ha de abonar de forma mensual, por mes anticipado.
+            11. La remesa de recibos será cobrado el día cinco de cada mes, por mes anticipado. Se cobrará 1,50 € por cada recibo devuelto.
+            12. Las primeras cuatro semanas son el periodo de prueba. Durante este tiempo, se puede cancelar el presente contrato sin tener que respetar ningún tipo de aviso previo. El importe abonado para estas primeras cuatro semanas no será reembolsado. Después de este periodo, la rescisión del presente contrato se ha de presentar de forma escrita, con una antelación de dos meses, para finales del mes correspondiente. En este contexto les recordamos, que la duración del curso es de aproximadamente 10 meses, y que no se debería interrumpir la asistencia al mismo para poder garantizar el éxito del aprendizaje y conservar la estructura de grupos pequeños.
+            13. El material se entregará paulatinamente y de forma gratuita a lo largo del curso. En caso de finalización anticipada, no habrá derecho de reclamar el material restante.
+            14. Por motivos pedagógicos, los alumnos no pueden interrumpir temporalmente el programa de Helen Doron English. La asistencia a las clases con regularidad es una condición básica para conseguir los buenos resultados de aprendizaje. No obstante, en el caso que el/la alumno/a tenga que ausentarse de la clase de forma puntual durante un mes, puede guardar su plaza pagando una cuota de mantenimiento correspondiente a la mitad del importe de la mensualidad.
+            15. No se reembolsan clases a las que el alumno no haya asistido.
+            16. En el caso de baja antes del final del curso escolar, no se aplicará el descuento por renovación.
+            17. La suscripción de la presente matrícula implica la aceptación por el alumno, y sus tutores, de un compromiso de comportamiento adecuado y proactivo para el buen desarrollo del curso; el incumplimiento grave y/o reiterado de este compromiso facultará a la dirección del Centro a tomar las medidas pertinentes, incluyendo entre otras la expulsión del curso. De manera específica, se sancionarán con la máxima gravedad las conductas de acoso, bullying, homofobia, sexistas y, en general, toda forma de violencia en el Centro. La imposición de medidas correctoras ante comportamientos inadecuados no generará ningún derecho de reembolso sobre cantidades ya abonadas /o devengadas.
+            18. Les informamos de que no disponemos de un seguro adicional de accidentes para su(s) hijo(s) en nuestras instalaciones.
+            19. El material didáctico está protegido por la legislación de derechos de autor. Todos los derechos son propiedad intelectual de Helen Doron LTD.
+            20. Cada franquicia de HD es de propiedad y operativa independiente.
+            21. En el caso de que alguna de las cláusulas del presente contrato se viera anulada o modificada por la ley española vigente, las demás cláusulas del contrato seguirán en vigor sin alteraciones.
+        </span>
+    </BodyTemplate>
+    <FooterTemplate>
+        <HxButton Text="Confirmar" OnClick=" () => additionalClausesModal.HideAsync()" Color="ThemeColor.Primary" />
+    </FooterTemplate>
+</HxModal>
 
 <HxModal @ref="emptyForm" Centered="true">
     <HeaderTemplate>
