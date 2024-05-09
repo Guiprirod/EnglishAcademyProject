@@ -11,7 +11,7 @@
         <!-- your steps here -->
         <div class="step" data-target="#logins-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
-                @if (stepForm == 0 || stepForm == 1 || stepForm == 2 || stepForm == 3)
+                @if(stepForm == 0 || stepForm == 1 || stepForm == 2 || stepForm == 3)
                 {
                     <span class="bs-stepper-circle-selected ">1</span>
 
@@ -22,12 +22,12 @@
         <div class="line"></div>
         <div class="step" data-target="#information-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                @if (stepForm == 0)
+                @if(stepForm == 0)
                 {
                     <span class="bs-stepper-circle">2</span>
 
                 }
-                @if (stepForm == 1 || stepForm == 2 || stepForm == 3)
+                @if(stepForm == 1 || stepForm == 2 || stepForm == 3)
                 {
                     <span class="bs-stepper-circle-selected">2</span>
                 }
@@ -37,12 +37,12 @@
         <div class="line"></div>
         <div class="step" data-target="#information-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                @if (stepForm == 0 || stepForm == 1)
+                @if(stepForm == 0 || stepForm == 1)
                 {
                     <span class="bs-stepper-circle">3</span>
 
                 }
-                @if (stepForm == 2 || stepForm == 3)
+                @if(stepForm == 2 || stepForm == 3)
                 {
                     <span class="bs-stepper-circle-selected">3</span>
                 }
@@ -52,12 +52,12 @@
         <div class="line"></div>
         <div class="step" data-target="#information-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                @if (stepForm == 0 || stepForm == 1 || stepForm == 2)
+                @if(stepForm == 0 || stepForm == 1 || stepForm == 2)
                 {
                     <span class="bs-stepper-circle">4</span>
 
                 }
-                @if (stepForm == 3)
+                @if(stepForm == 3)
                 {
                     <span class="bs-stepper-circle-selected">4</span>
                 }
@@ -90,7 +90,7 @@
         </div>
         <hr>
         <div class="section">
-            @if (stepForm == 0)
+            @if(stepForm == 0)
             {
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
@@ -126,7 +126,7 @@
                     </div>
                 </div>
             }
-            @if (stepForm == 1)
+            @if(stepForm == 1)
             {
                 <div class="row">
                     <div class="col-sm-6" style="text-align:center;">
@@ -190,7 +190,7 @@
                 </div>
 
             }
-            @if (stepForm == 2)
+            @if(stepForm == 2)
             {
                 <div class="row">
                     <div class="col-sm-6">
@@ -287,11 +287,11 @@
                 </div>
 
             }
-            @if (stepForm == 3)
+            @if(stepForm == 3)
             {
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
-                        <h3>Información a tener en cuenta(situación familiar, etc.) *</h3>
+                        <h3>Información a tener en cuenta(situación familiar, etc.)</h3>
                         <HxInputTextArea @bind-Value="@form.additionalInformation"></HxInputTextArea>
                     </div>
                 </div>
@@ -329,7 +329,7 @@
 
                     </div>
                 </div>
-                @if (form.bank)
+                @if(form.bank)
                 {
                     <div class="row">
                         <div class="col-sm-12">
@@ -338,7 +338,7 @@
 
                     </div>
                 }
-                <div class="row">
+                <div class="row" style="padding-top:1rem !important;">
                     <div class="col-sm-12">
                         <HxInputText @bind-Value="@form.anotherHolder" Label="En el caso de que el titular de la cuenta sea distinto del padre/madre/tutor legal, indique nombre y apellidos del titular:"></HxInputText>
                     </div>
@@ -466,6 +466,17 @@
     </BodyTemplate>
     <FooterTemplate>
         <HxButton Text="Confirmar" OnClick=" () => emptyForm.HideAsync()" Color="ThemeColor.Primary" />
+    </FooterTemplate>
+</HxModal>
+<HxModal @ref="emailSuccessfully" Centered="true">
+    <HeaderTemplate>
+        <strong><h3>¡Bienvenido!</h3></strong>
+    </HeaderTemplate>
+    <BodyTemplate>
+        <HxAlert Color="ThemeColor.Success">El email ha sido enviado correctamente.</HxAlert>
+    </BodyTemplate>
+    <FooterTemplate>
+        <HxButton Text="Confirmar" OnClick=" () => emailSuccessfully.HideAsync()" Color="ThemeColor.Primary" />
     </FooterTemplate>
 </HxModal>
 
