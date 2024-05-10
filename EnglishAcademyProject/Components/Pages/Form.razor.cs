@@ -31,13 +31,16 @@ namespace EnglishAcademyProject.Components.Pages
         private HxModal additionalClausesModal;
         private HxModal emailSuccessfully;
         private string? method;
+        public bool enableAnnual = true; 
+        public bool enableMonth = true;
+        public bool enableQuarter = true;
 
 
         protected override async Task OnInitializedAsync()
         {
 
             form.additionalInformation = "";
-            _labelParentName = "Nombre y apellidos de madre/padre/tutor legal *";
+            _labelParentName = "Nombre y apellidos de tutor legal *";
 
             var miMock = new Mock.Mock();
 
@@ -108,7 +111,7 @@ namespace EnglishAcademyProject.Components.Pages
             }
             else if(pass == 2)
             {
-                if (form.authorizationAdditionalClauses && form.authorizationDataProcessing)
+                if(form.authorizationAdditionalClauses && form.authorizationDataProcessing)
                 {
                     stepForm = 3;
                     mainTitle = "Datos Bancarios";
@@ -118,7 +121,7 @@ namespace EnglishAcademyProject.Components.Pages
                     await emptyForm.ShowAsync();
                 }
             }
-        
+
             else if(pass == 3)
             {
                 SendEmail("guilleprieto08@gmail.com", "Bienvenido a Academia Sevilla Este", $"Bienvenido {form.nameparent} a Academias Sevilla este, el registro de su hijo/a {form.sonsName} al curso de {selectedCourse} ha sido completado correctamente");
@@ -130,6 +133,48 @@ namespace EnglishAcademyProject.Components.Pages
             navigationManager.NavigateTo($"form/{CourseId.ToString()}/{NameCourse}");
 
         }
+        
+
+        private void ReviewChecksMonthPayment()
+        {
+            if(form.monthlyPayment)
+            {
+                enableMonth = true;
+                enableQuarter = false;
+                enableAnnual = false;
+
+            }
+            
+        }private void ReviewChecksQuarterPayment()
+        {
+            
+            if(form.quarterlyPayment)
+            {
+                enableAnnual = false;
+                enableMonth = false;
+                enableQuarter = true;
+            }
+            
+            
+        }private void ReviewChecksAnnualPayment()
+        {
+            
+            if (form.annualPayment)
+            {
+                enableAnnual = true;
+                enableMonth = false;
+                enableQuarter = false;
+            }
+        }private void ReviewChecksPayment()
+        {
+            
+           
+                enableAnnual = true;
+                enableMonth = true;
+                enableQuarter = true;
+            
+        }
+
 
         public void SendEmail(string toAddress, string subject, string body)
         {

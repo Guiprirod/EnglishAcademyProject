@@ -93,30 +93,82 @@
             @if(stepForm == 0)
             {
                 <div class="row">
-                    <div class="col-sm-12" style="text-align:center;">
-                        <HxInputText Label="Nombre del hijo/a a matricular *" @bind-Value="@form.sonsName"></HxInputText>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento *" @bind-Value="@form.sonsBirthday" />
-                    </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Curso Escolar *" @bind-Value="@form.schoolYear" Placeholder="2024/2025"></HxInputText>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Día de Preferencia *" @bind-Value="@form.preferenceDay" Placeholder="A confirmar por el centro"></HxInputText>
-                    </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Hora de Preferencia *" @bind-Value="@form.preferenceSchedule" Placeholder="A confirmar por el centro"></HxInputText>
+                    <div class="col align-self-center">
+                        <div class="row" style="align-items:baseline;">
+                            <div class="col-sm-4" style="text-align:end">
+                                <HxIcon Icon="@BootstrapIcon.PersonArmsUp" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <HxInputText Label="Nombre del hijo/a a matricular *" @bind-Value="@form.sonsName"></HxInputText>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 
                     </div>
                 </div>
-                <div class="row" style="text-align:center">
-                    <div class="col-sm-12">
-                        <HxCheckbox Text="¿Su hijo/a tiene que pagar matrícula? *" @bind-Value="@form.paid" Inline="true"></HxCheckbox>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.Calendar" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputDate CalendarIcon="BootstrapIcon.Calendar" Label="Fecha de Nacimiento *" @bind-Value="@form.sonsBirthday" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.Calendar3" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Curso Escolar *" @bind-Value="@form.schoolYear" Placeholder="2024/2025"></HxInputText>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.CalendarWeek" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Día de Preferencia *" @bind-Value="@form.preferenceDay" Placeholder="A confirmar por el centro"></HxInputText>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.CalendarWeek" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Hora de Preferencia *" @bind-Value="@form.preferenceSchedule" Placeholder="A confirmar por el centro"></HxInputText>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <div class="row" style="align-items:baseline;">
+                            <div class="col-sm-4" style="text-align:end">
+                                <HxIcon Icon="@BootstrapIcon.CashCoin" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <HxCheckbox Text="¿Su hijo/a tiene que pagar matrícula? *" @bind-Value="@form.paid" Inline="true"></HxCheckbox>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -129,55 +181,140 @@
             @if(stepForm == 1)
             {
                 <div class="row">
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="@(_labelParentName)" @bind-Value="form.nameparent"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.People" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="@(_labelParentName)" @bind-Value="form.nameparent"></HxInputText>
+
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="NIF/NIE *" @bind-Value="form.nationalId"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.PersonVcard" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="NIF/NIE *" @bind-Value="form.nationalId"></HxInputText>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Nombre y apellidos de madre/padre/tutor legal" @bind-Value="form.nameparent2"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.People" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Nombre y apellidos de tutor legal" @bind-Value="form.nameparent2"></HxInputText>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="NIF/NIE" @bind-Value="form.nationalId2"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.PersonVcard" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="NIF/NIE" @bind-Value="form.nationalId2"></HxInputText>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Teléfono madre/padre/tutor legal *" @bind-Value="form.phoneNumber"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.Telephone" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Teléfono madre/padre/tutor legal *" @bind-Value="form.phoneNumber"></HxInputText>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Teléfono madre/padre/tutor legal" @bind-Value="form.phoneNumber2"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.Telephone" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Teléfono madre/padre/tutor legal" @bind-Value="form.phoneNumber2"></HxInputText>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.EnvelopeAt" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Correo electrónico *" @bind-Value="form.email"></HxInputText>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.EnvelopeAt" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Correo electrónico 2" @bind-Value="form.email2"></HxInputText>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Correo electrónico *" @bind-Value="form.email"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.Signpost2" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Direción *" @bind-Value="form.address"></HxInputText>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Correo electrónico 2" @bind-Value="form.email2"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.Buildings" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Ciudad *" @bind-Value="form.city"></HxInputText>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Direción *" @bind-Value="form.address"></HxInputText>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.Building" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Provincia *" @bind-Value="form.province"></HxInputText>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Ciudad *" @bind-Value="form.city"></HxInputText>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Provincia *" @bind-Value="form.province"></HxInputText>
-                    </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxInputText Label="Código Postal *" @bind-Value="form.cp"></HxInputText>
-
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <HxIcon Icon="@BootstrapIcon.MailboxFlag" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-11">
+                                <HxInputText Label="Código Postal *" @bind-Value="form.cp"></HxInputText>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row" style="text-align:center">
@@ -234,26 +371,29 @@
                 </div>
                 <div class="row" style="padding:1rem !important;">
                     <div class="col-sm-6">
-                        <div class="row">
+                        <div class="row" style="align-items: baseline !important">
                             <div class="col-sm-1">
                                 <HxCheckbox @bind-Value="@form.authorizationDataProcessing"></HxCheckbox>
 
                             </div>
                             <div class="col-sm-11">
-                                <HxNavLink OnClick=" () => dataProcessingModal.ShowAsync()" Match="NavLinkMatch.Prefix">He leído y autorizo a realizar el tratamiento de datos descrito *</HxNavLink>
-
+                                <HxNav Variant="NavVariant.Underline">
+                                    <HxNavLink OnClick=" () => dataProcessingModal.ShowAsync()" Match="NavLinkMatch.Prefix">He leído y autorizo a realizar el tratamiento de datos descrito *</HxNavLink>
+                                </HxNav>
                             </div>
                         </div>
 
                     </div>
                     <div class="col-sm-6">
-                        <div class="row">
+                        <div class="row" style="align-items: baseline !important">
                             <div class="col-sm-1" style="text-align:end;">
                                 <HxCheckbox @bind-Value="@form.authorizationAdditionalClauses"></HxCheckbox>
 
                             </div>
                             <div class="col-sm-11">
-                                <HxNavLink OnClick=" () => additionalClausesModal.ShowAsync()" Match="NavLinkMatch.Prefix">Acepto las cláusulas adicionales *</HxNavLink>
+                                <HxNav Variant="NavVariant.Underline">
+                                    <HxNavLink OnClick=" () => additionalClausesModal.ShowAsync()" Match="NavLinkMatch.Prefix">Acepto las cláusulas adicionales *</HxNavLink>
+                                </HxNav>
 
                             </div>
                         </div>
@@ -290,33 +430,75 @@
             @if(stepForm == 3)
             {
                 <div class="row">
-                    <div class="col-sm-12" style="text-align:center;">
-                        <h3>Información a tener en cuenta(situación familiar, etc.)</h3>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align:end">
+                                <HxIcon Icon="BootstrapIcon.InfoCircleFill" CssClass="icon"></HxIcon>
+                            </div>
+                            <div class="col-sm-8">
+                                <h3 style="text-align:left !important">Información a tener en cuenta(situación familiar, etc.)</h3>
+                            </div>
+                        </div>
+
                         <HxInputTextArea @bind-Value="@form.additionalInformation"></HxInputTextArea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12" style="text-align:center;">
-                        <h3>Personas que pueden recoger de clase a mi hijo/a (nombre/parentesco) *</h3>
+                        <div class="row">
+                            <div class="col-sm-3" style="text-align:end">
+                                <HxIcon Icon="BootstrapIcon.PeopleFill" CssClass="icon"></HxIcon>
+
+                            </div>
+                            <div class="col-sm-9">
+
+                                <h3>Personas que pueden recoger de clase a mi hijo/a (nombre/parentesco) *</h3>
+                            </div>
+                        </div>
+
                         <HxInputTextArea @bind-Value="@form.morePeople"></HxInputTextArea>
                         <br />
-                        <h3><strong>Se ruega informar antes de la clase si alguien distinto de los padres/tutores legales pasará a recoger al/el menor)</strong></h3>
+
                     </div>
                 </div>
-                <div class="row" style="padding-top:1rem;">
+
+                <div class="row">
+                    <div class="col-sm-1">
+                        <HxIcon CssClass="icon" Icon="BootstrapIcon.ExclamationCircleFill"></HxIcon>
+                    </div>
+                    <div class="col-sm-11">
+                        <h3><strong>Se ruega informar antes de la clase si alguien distinto de los padres/tutores legales pasará a recoger al/el menor)</strong></h3>
+
+                    </div>
+
+                </div>
+                <div class="row" style="padding-top:2rem !important; text-align:center !important">
                     <br>
                     <h2>Método de pago</h2>
                     <hr>
 
                     <div class="col-sm-4">
-                        <HxCheckbox Text="Pago Mensual" @bind-Value="form.monthlyPayment" Inline=true></HxCheckbox>
+                        <HxCheckbox Text="Pago Mensual" @bind-Value="form.monthlyPayment" Inline=true Enabled="@enableMonth" ></HxCheckbox>
                     </div><div class="col-sm-4">
-                        <HxCheckbox Text="Pago Trimestral (5% dto. por trimestre)" @bind-Value="form.quarterlyPayment" Inline=true></HxCheckbox>
+                        <HxCheckbox Text="Pago Trimestral (5% dto. por trimestre)" @bind-Value="form.quarterlyPayment" Inline=true Enabled="@enableQuarter"></HxCheckbox>
                     </div><div class="col-sm-4">
-                        <HxCheckbox Text="Pago Anual (10% dto. anual)" @bind-Value="form.annualPayment" Inline=true></HxCheckbox>
+                        <HxCheckbox Text="Pago Anual (10% dto. anual)" @bind-Value="form.annualPayment" Inline=true Enabled="@enableAnnual"></HxCheckbox>
                     </div>
+                    @if(form.monthlyPayment)
+                    {
+                        ReviewChecksMonthPayment();
+                    }
+                    @if(form.quarterlyPayment)
+                    {
+                        ReviewChecksQuarterPayment();
+                    }
+                    @if(form.annualPayment)
+                    {
+                        ReviewChecksAnnualPayment();
+                    }
+                    @if(form.monthlyPayment == false && form.quarterlyPayment == false && form.annualPayment == false) { ReviewChecksPayment(); }
                 </div>
-                <div class="row" style="padding-top:1rem;">
+                <div class="row" style="padding-top:2rem !important; text-align:center !important">
                     <br>
                     <h2>Forma de pago</h2>
                     <hr>
@@ -344,7 +526,7 @@
                     </div>
 
                 </div>
-                <div class="row">
+                <div class="row" style="padding: 1rem !important;">
                     <div class="col-sm-12">
                         <HxCheckbox Text="Acepto el aviso legal y la política de privacidad *" @bind-Value="@form.privacyPolicy" Inline=true></HxCheckbox>
                     </div>
@@ -456,11 +638,8 @@
         <HxButton Text="Confirmar" OnClick=" () => additionalClausesModal.HideAsync()" Color="ThemeColor.Primary" />
     </FooterTemplate>
 </HxModal>
+<HxModal @ref="emptyForm" Centered="true" Title="Formulario Incorrecto">
 
-<HxModal @ref="emptyForm" Centered="true">
-    <HeaderTemplate>
-        <strong><h3>Formulario incorrecto</h3></strong>
-    </HeaderTemplate>
     <BodyTemplate>
         <HxAlert Color="ThemeColor.Danger">Por favor, revise que ha rellenado todos los campos obligatorios.</HxAlert>
     </BodyTemplate>
@@ -468,10 +647,8 @@
         <HxButton Text="Confirmar" OnClick=" () => emptyForm.HideAsync()" Color="ThemeColor.Primary" />
     </FooterTemplate>
 </HxModal>
-<HxModal @ref="emailSuccessfully" Centered="true">
-    <HeaderTemplate>
-        <strong><h3>¡Bienvenido!</h3></strong>
-    </HeaderTemplate>
+<HxModal @ref="emailSuccessfully" Centered="true" Title="¡Bienvenido!">
+
     <BodyTemplate>
         <HxAlert Color="ThemeColor.Success">El email ha sido enviado correctamente.</HxAlert>
     </BodyTemplate>
