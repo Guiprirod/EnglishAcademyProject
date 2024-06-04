@@ -8,10 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddHxServices();
+builder.Services.AddLocalization();
+
 
 
 var app = builder.Build();
 
+app.UseRequestLocalization(new RequestLocalizationOptions()
+    .AddSupportedCultures(new[] { "es-ES" }));
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

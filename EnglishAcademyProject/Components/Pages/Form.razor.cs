@@ -31,7 +31,7 @@ namespace EnglishAcademyProject.Components.Pages
         private HxModal additionalClausesModal;
         private HxModal emailSuccessfully;
         private string? method;
-        public bool enableAnnual = true; 
+        public bool enableAnnual = true;
         public bool enableMonth = true;
         public bool enableQuarter = true;
 
@@ -89,6 +89,7 @@ namespace EnglishAcademyProject.Components.Pages
             {
                 if(!System.String.IsNullOrEmpty(form.sonsName) && !System.String.IsNullOrEmpty(form.preferenceDay) && !System.String.IsNullOrEmpty(form.preferenceSchedule) && !System.String.IsNullOrEmpty(form.sonsBirthday.ToShortDateString()))
                 {
+
                     stepForm = 1;
                     mainTitle = "Datos de Contacto";
                 }
@@ -133,7 +134,7 @@ namespace EnglishAcademyProject.Components.Pages
             navigationManager.NavigateTo($"form/{CourseId.ToString()}/{NameCourse}");
 
         }
-        
+
 
         private void ReviewChecksMonthPayment()
         {
@@ -144,35 +145,38 @@ namespace EnglishAcademyProject.Components.Pages
                 enableAnnual = false;
 
             }
-            
-        }private void ReviewChecksQuarterPayment()
+
+        }
+        private void ReviewChecksQuarterPayment()
         {
-            
+
             if(form.quarterlyPayment)
             {
                 enableAnnual = false;
                 enableMonth = false;
                 enableQuarter = true;
             }
-            
-            
-        }private void ReviewChecksAnnualPayment()
+
+
+        }
+        private void ReviewChecksAnnualPayment()
         {
-            
-            if (form.annualPayment)
+
+            if(form.annualPayment)
             {
                 enableAnnual = true;
                 enableMonth = false;
                 enableQuarter = false;
             }
-        }private void ReviewChecksPayment()
+        }
+        private void ReviewChecksPayment()
         {
-            
-           
-                enableAnnual = true;
-                enableMonth = true;
-                enableQuarter = true;
-            
+
+
+            enableAnnual = true;
+            enableMonth = true;
+            enableQuarter = true;
+
         }
 
 
@@ -190,8 +194,90 @@ namespace EnglishAcademyProject.Components.Pages
             // Creación del mensaje de correo
             MailMessage message = new MailMessage(fromAddress, toAddress);
             message.Subject = subject;
-            message.Body = body;
 
+            string cuerpo = $@"
+        <html>
+        <head>
+            <style>
+                body {{ font-family: Arial, sans-serif; }}
+                h1 {{ color: #333333; }}
+                p {{ font-size: 14px; color: #666666; }}
+                .button {{
+                    background-color: #4CAF50; /* Verde */
+                    border: none;
+                    color: white;
+                    padding: 10px 20px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    border-radius: 12px;
+                }}
+                .colum {{ color: #3333; }}
+
+            </style>
+        </head>
+        <body>
+            <h1>¡Hola, {form.nameparent}!</h1>
+            <br>
+            <h3>¡Bienvenido a Academia Sevilla Este!</h3>
+            <br>
+            <p>Este es un correo electrónico de confirmación, donde puedes ver un <strong>resumen del formulario rellenado</strong>, si detectara algún error, por favor póngase en contacto con nosotros lo antes posible.</p>
+            <br>
+<TABLE BORDER>
+	<TR>
+		<TH COLSPAN=6>Datos del Curso</TH>
+	</TR>
+	<TR>
+		<TH>Nombre hijo/a</TH> <TH>Fecha Nacimiento</TH> <TH>Curso Escolar</TH> <TH>Día</TH> <TH>Hora</TH><TH>¿Pagar matrícula?</TH> 
+	</TR>
+	<TR>
+		<TD>{form.sonsName}</TD> <TD>{form.sonsBirthday.ToShortDateString()}</TD> <TD>{form.schoolYear}</TD><TD>{form.preferenceDay}</TD><TD>{form.preferenceSchedule}</TD><TD>{TrueToYes(form.paid.ToString())}</TD> 
+	</TR>
+</TABLE>
+<TABLE BORDER>
+	<TR>
+		<TH COLSPAN=8>Datos de Contacto</TH>
+	</TR>
+	<TR>
+		<TH>Nombre y apellidos del tutor legal</TH> <TH>NIF/NIE</TH> <TH>Teléfono tutor legal</TH> <TH>Correo electrónico</TH> <TH>Dirección</TH><TH>Ciudad</TH> <TH>Provincia</TH> <TH>Código Postal</TH> 
+	</TR>
+	<TR>
+		<TD>{form.nameparent}</TD> <TD>{form.nationalId}</TD> <TD>{form.phoneNumber}</TD><TD>{form.email}</TD><TD>{form.address}</TD><TD>{form.city}</TD> <TD>{form.province}</TD> <TD>{form.cp}</TD> 
+	</TR>
+</TABLE>
+<TABLE BORDER>
+	<TR>
+		<TH COLSPAN=7>Datos de Contacto</TH>
+	</TR>
+	<TR>
+		<TH>¿Puede ir solo a casa?</TH> <TH>¿Alergias?</TH> <TH>¿Uso de Whatsapp?</TH> <TH>¿Publicación de fotos?</TH> <TH>¿Envío de comunicaciones comerciales?</TH><TH>Tratamiento de datos</TH> <TH>Cláusulas adicionales</TH>
+	</TR>
+	<TR>
+		<TD>{TrueToYes(form.goHome.ToString())}</TD> <TD>{TrueToYes(form.alergias.ToString())}</TD> <TD>{TrueToYes(form.whatsapp.ToString())}</TD><TD>{TrueToYes(form.photos.ToString())}</TD><TD>{TrueToYes(form.commercialCommunications.ToString())}</TD><TD>{TrueToYes(form.authorizationDataProcessing.ToString())}</TD> <TD>{TrueToYes(form.authorizationAdditionalClauses.ToString())}</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER>
+	<TR>
+		<TH COLSPAN=7>Datos de Contacto</TH>
+	</TR>
+	<TR>
+		<TH>¿Puede ir solo a casa?</TH> <TH>¿Alergias?</TH> <TH>¿Uso de Whatsapp?</TH> <TH>¿Publicación de fotos?</TH> <TH>¿Envío de comunicaciones comerciales?</TH><TH>Tratamiento de datos</TH> <TH>Cláusulas adicionales</TH>
+	</TR>
+	<TR>
+		<TD>{TrueToYes(form.goHome.ToString())}</TD> <TD>{TrueToYes(form.alergias.ToString())}</TD> <TD>{TrueToYes(form.whatsapp.ToString())}</TD><TD>{TrueToYes(form.photos.ToString())}</TD><TD>{TrueToYes(form.commercialCommunications.ToString())}</TD><TD>{TrueToYes(form.authorizationDataProcessing.ToString())}</TD> <TD>{TrueToYes(form.authorizationAdditionalClauses.ToString())}</TD>
+	</TR>
+</TABLE>
+
+<br>
+            <a href='{"urlBoton"}' class='button'>Visitar Sitio</a>
+        </body>
+        </html>";
+
+            message.Body = cuerpo;
+            message.IsBodyHtml = true;
             // Configuración del cliente SMTP
             SmtpClient client = new SmtpClient(smtpHost, smtpPort);
             client.UseDefaultCredentials = false;
@@ -217,6 +303,19 @@ namespace EnglishAcademyProject.Components.Pages
                 message.Dispose();
                 client.Dispose();
             }
+        }
+
+        private string TrueToYes(string value)
+        {
+            if(value == "True")
+            {
+                value = "Sí";
+            }
+            else
+            {        
+                value = "No";
+            }
+            return value;
         }
     }
 }
