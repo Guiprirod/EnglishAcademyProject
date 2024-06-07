@@ -1,5 +1,28 @@
-html, body {
+html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: none !important;
+    background-image: url(https://img.freepik.com/foto-gratis/diversos-ninos-leyendo-libros_53876-146406.jpg?w=740&t=st=1709994025~exp=1709994625~hmac=49223c53f2549a841d00f96eefcfc195d8bd13655472c977675f96f2ded9efbb);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 0;
+        height: none !important;
+        background-image: url(https://img.freepik.com/foto-gratis/diversos-ninos-leyendo-libros_53876-146406.jpg?w=740&t=st=1709994025~exp=1709994625~hmac=49223c53f2549a841d00f96eefcfc195d8bd13655472c977675f96f2ded9efbb);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 }
 
 a, .btn-link {

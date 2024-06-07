@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Reflection.Emit;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Globalization;
 
 namespace EnglishAcademyProject.Components.Pages
 {
@@ -216,6 +217,7 @@ namespace EnglishAcademyProject.Components.Pages
                     border-radius: 12px;
                 }}
                 .colum {{ color: #3333; }}
+                .align {{ text-align: center; padding:1rem; }}
 
             </style>
         </head>
@@ -226,48 +228,57 @@ namespace EnglishAcademyProject.Components.Pages
             <br>
             <p>Este es un correo electrónico de confirmación, donde puedes ver un <strong>resumen del formulario rellenado</strong>, si detectara algún error, por favor póngase en contacto con nosotros lo antes posible.</p>
             <br>
+            <p>¡Gracias por confiar en nosotros!</p>
+
 <TABLE BORDER>
 	<TR>
-		<TH COLSPAN=6>Datos del Curso</TH>
+		<TH COLSPAN=6><strong>Datos del Curso</strong></TH>
 	</TR>
 	<TR>
 		<TH>Nombre hijo/a</TH> <TH>Fecha Nacimiento</TH> <TH>Curso Escolar</TH> <TH>Día</TH> <TH>Hora</TH><TH>¿Pagar matrícula?</TH> 
 	</TR>
 	<TR>
-		<TD>{form.sonsName}</TD> <TD>{form.sonsBirthday.ToShortDateString()}</TD> <TD>{form.schoolYear}</TD><TD>{form.preferenceDay}</TD><TD>{form.preferenceSchedule}</TD><TD>{TrueToYes(form.paid.ToString())}</TD> 
+		<TD class='align'>{form.sonsName}</TD> <TD class='align'>{form.sonsBirthday.ToShortDateString()}</TD> <TD  class='align'>{form.schoolYear}</TD><TD class='align'>{form.preferenceDay}</TD><TD class='align'>{form.preferenceSchedule}</TD><TD class='align'>{TrueToYes(form.paid.ToString())}</TD> 
 	</TR>
 </TABLE>
+            <br>
+
+
 <TABLE BORDER>
 	<TR>
-		<TH COLSPAN=8>Datos de Contacto</TH>
+		<TH COLSPAN=6><strong>Datos de Contacto</strong></TH>
 	</TR>
 	<TR>
 		<TH>Nombre y apellidos del tutor legal</TH> <TH>NIF/NIE</TH> <TH>Teléfono tutor legal</TH> <TH>Correo electrónico</TH> <TH>Dirección</TH><TH>Ciudad</TH> <TH>Provincia</TH> <TH>Código Postal</TH> 
 	</TR>
 	<TR>
-		<TD>{form.nameparent}</TD> <TD>{form.nationalId}</TD> <TD>{form.phoneNumber}</TD><TD>{form.email}</TD><TD>{form.address}</TD><TD>{form.city}</TD> <TD>{form.province}</TD> <TD>{form.cp}</TD> 
+		<TD class='align'>{form.nameparent}</TD> <TD class='align'>{form.nationalId}</TD> <TD class='align'>{form.phoneNumber}</TD><TD class='align'>{form.email}</TD><TD class='align'>{form.address}</TD><TD class='align'>{form.city}</TD> <TD class='align'>{form.province}</TD> <TD class='align'>{form.cp}</TD> 
 	</TR>
 </TABLE>
+            <br>
+
 <TABLE BORDER>
 	<TR>
-		<TH COLSPAN=7>Datos de Contacto</TH>
+		<TH COLSPAN=7><strong>Datos de Interés y condiciones legales</strong></TH>
 	</TR>
 	<TR>
 		<TH>¿Puede ir solo a casa?</TH> <TH>¿Alergias?</TH> <TH>¿Uso de Whatsapp?</TH> <TH>¿Publicación de fotos?</TH> <TH>¿Envío de comunicaciones comerciales?</TH><TH>Tratamiento de datos</TH> <TH>Cláusulas adicionales</TH>
 	</TR>
 	<TR>
-		<TD>{TrueToYes(form.goHome.ToString())}</TD> <TD>{TrueToYes(form.alergias.ToString())}</TD> <TD>{TrueToYes(form.whatsapp.ToString())}</TD><TD>{TrueToYes(form.photos.ToString())}</TD><TD>{TrueToYes(form.commercialCommunications.ToString())}</TD><TD>{TrueToYes(form.authorizationDataProcessing.ToString())}</TD> <TD>{TrueToYes(form.authorizationAdditionalClauses.ToString())}</TD>
+		<TD class='align'>{TrueToYes(form.goHome.ToString())}</TD> <TD class='align'>{TrueToYes(form.alergias.ToString())}</TD> <TD class='align'>{TrueToYes(form.whatsapp.ToString())}</TD><TD class='align'>{TrueToYes(form.photos.ToString())}</TD><TD class='align'>{TrueToYes(form.commercialCommunications.ToString())}</TD><TD class='align'>{TrueToYes(form.authorizationDataProcessing.ToString())}</TD> <TD class='align'>{TrueToYes(form.authorizationAdditionalClauses.ToString())}</TD>
 	</TR>
 </TABLE>
+            <br>
+
 <TABLE BORDER>
 	<TR>
-		<TH COLSPAN=7>Datos de Contacto</TH>
+		<TH COLSPAN=7><strong>Datos Bancarios</strong></TH>
 	</TR>
 	<TR>
-		<TH>¿Puede ir solo a casa?</TH> <TH>¿Alergias?</TH> <TH>¿Uso de Whatsapp?</TH> <TH>¿Publicación de fotos?</TH> <TH>¿Envío de comunicaciones comerciales?</TH><TH>Tratamiento de datos</TH> <TH>Cláusulas adicionales</TH>
+		<TH>Información a tener en cuenta</TH> <TH>¿Otras persona para recoger al niño/a?</TH> <TH>Método de pago</TH> <TH>Forma de pago</TH> <TH> {SelectTitleIban(form.bank)} </TH> <TH>¿Otro titular de la cuenta??</TH><TH>Aviso legal y política de privacidad</TH>
 	</TR>
 	<TR>
-		<TD>{TrueToYes(form.goHome.ToString())}</TD> <TD>{TrueToYes(form.alergias.ToString())}</TD> <TD>{TrueToYes(form.whatsapp.ToString())}</TD><TD>{TrueToYes(form.photos.ToString())}</TD><TD>{TrueToYes(form.commercialCommunications.ToString())}</TD><TD>{TrueToYes(form.authorizationDataProcessing.ToString())}</TD> <TD>{TrueToYes(form.authorizationAdditionalClauses.ToString())}</TD>
+		<TD class='align'>{TrueToYes(form.additionalInformation)}</TD> <TD class='align'>{form.morePeople}</TD> <TD class='align'>{SelectPaymentAnswer(form.monthlyPayment, form.quarterlyPayment, form.annualPayment)}</TD><TD class='align'>{SelectMethodPayment(form.bank, form.other)}</TD><TD>{SelectIban(form.bank)}</TD><TD class='align'>{SelectOtherHolder(form.anotherHolder)}</TD> <TD class='align'>{TrueToYes(form.privacyPolicy.ToString())}</TD>
 	</TR>
 </TABLE>
 
@@ -316,6 +327,75 @@ namespace EnglishAcademyProject.Components.Pages
                 value = "No";
             }
             return value;
+        }
+        private string SelectPaymentAnswer(bool monthlyPayment, bool quarterlyPayment, bool annualPayment)
+        {
+            string answer = "";
+            if(monthlyPayment)
+            {
+                answer = "Mensual";
+            }
+            else if(quarterlyPayment)
+            {
+                answer = "Trimestral";
+            }
+            else if(annualPayment)
+            {
+                answer = "Anual";
+            }
+            return answer;
+        }
+        private string SelectMethodPayment(bool bank, bool other)
+        {
+            string answer = "";
+            if(bank)
+            {
+                answer = "Domiciliación Bancaria";
+            }
+            else if(other)
+            {
+                answer = "Otro";
+            }
+            return answer;
+        }
+        private string SelectIban(bool bank)
+        {
+            string answer = "";
+            if(bank)
+            {
+                answer = form.iban;
+            }
+            else
+            {
+                answer = "No se ha seleccionado domiciliación bancaria";
+            }
+            return answer;
+        }   
+        private string SelectTitleIban(bool bank)
+        {
+            string answer = "";
+            if(bank)
+            {
+                answer = "IBAN";
+            }
+            else
+            {
+                answer = "No se ha seleccionado domiciliación bancaria";
+            }
+            return answer;
+        }
+        private string SelectOtherHolder(string anotherHolder)
+        {
+            string answer = "";
+            if(System.String.IsNullOrEmpty(form.anotherHolder))
+            {
+                answer = "No";
+            }
+            else
+            {
+                answer = form.anotherHolder;
+            }
+            return answer;
         }
     }
 }

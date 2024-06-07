@@ -1,12 +1,4 @@
-﻿body {
-    background-image: url(https://img.freepik.com/foto-gratis/diversos-ninos-leyendo-libros_53876-146406.jpg?w=740&t=st=1709994025~exp=1709994625~hmac=49223c53f2549a841d00f96eefcfc195d8bd13655472c977675f96f2ded9efbb);
-    margin: 0;
-    padding: 0 !important;
-    background-size: cover; /* La imagen cubrirá todo el área del elemento */
-    background-position: center; /* La imagen estará centrada */
-    background-repeat: no-repeat; /* Evitar que la imagen se repita */
-    height: 100vh; /* Ajustar la altura del cuerpo al 100% del viewport */
-}
+﻿
 
 .menu {
     width: 80%;
