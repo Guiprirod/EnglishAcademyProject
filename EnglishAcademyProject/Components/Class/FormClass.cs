@@ -35,9 +35,6 @@
         public bool authorizationAdditionalClauses { get; set; }
         public string additionalInformation { get; set; }
         public string morePeople { get; set; }
-        public bool monthlyPayment { get; set; }
-        public bool quarterlyPayment { get; set; }
-        public bool annualPayment { get; set; }
         public bool other { get; set; }
         public bool bank { get; set; }
         public string iban { get; set; }

@@ -12,9 +12,9 @@ namespace EnglishAcademyProject.Components.Mock
 
             var data = new List<OfficialCourses>
         {
-            new OfficialCourses { ID = 1, Name = "Alphaboat" , Price= 30},
-            new OfficialCourses{ ID = 2, Name = "Nat and Friends", Price= 30 },
-            new OfficialCourses { ID = 3, Name = "It's a Baby Dragon", Price = 30 }
+            new OfficialCourses { ID = 1, Name = "Alphaboat" , Price= 30, Duration="45"},
+            new OfficialCourses{ ID = 2, Name = "Nat and Friends", Price= 30 ,Duration="45"},
+            new OfficialCourses { ID = 3, Name = "It's a Baby Dragon", Price = 30 , Duration = "45"}
             // Agrega más elementos según sea necesario
         };
             return data;

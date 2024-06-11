@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection.Emit;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Globalization;
+using Microsoft.AspNetCore.Authentication;
 
 namespace EnglishAcademyProject.Components.Pages
 {
@@ -24,21 +25,66 @@ namespace EnglishAcademyProject.Components.Pages
         private List<OfficialCourses> data = new List<OfficialCourses>();
         private int stepForm = new int();
         private string? selectedCourse;
-        private string price;
         private string? mainTitle = "Datos del Curso";
         private string? _labelParentName;
+        private string? course;
         private HxModal emptyForm;
         private HxModal dataProcessingModal;
         private HxModal additionalClausesModal;
         private HxModal emailSuccessfully;
+        private bool loading;
         private string? method;
-        public bool enableAnnual = true;
-        public bool enableMonth = true;
-        public bool enableQuarter = true;
+        private bool enableMonth
+        {
+            get => _enableMonth;
+            set
+            {
+                _enableMonth = value;
+                if(value)
+                {
+                    enableQuarter = false;
+                    enableAnnual = false;            
+
+                }
+            }
+        }
+
+        private bool enableQuarter
+        {
+            get => _enableQuarter;
+            set
+            {
+                _enableQuarter = value;
+                if(value)
+                {
+                    enableMonth = false;
+                    enableAnnual = false;
+                }
+            }
+        }
+
+        private bool enableAnnual
+        {
+            get => _enableAnnual;
+            set
+            {
+                _enableAnnual = value;
+                if(value)
+                {
+                    enableMonth = false;
+                    enableQuarter = false;
+                }
+            }
+        }
+
+        private bool _enableMonth;
+        private bool _enableQuarter;
+        private bool _enableAnnual;
 
 
         protected override async Task OnInitializedAsync()
         {
+
 
             form.additionalInformation = "";
             _labelParentName = "Nombre y apellidos de tutor legal *";
@@ -53,12 +99,13 @@ namespace EnglishAcademyProject.Components.Pages
             {
                 if(currentCourse == data.FirstOrDefault(x => x.ID.ToString() == CourseId))
                 {
-                    price = currentCourse.Price.ToString() + "€";
+                    course = currentCourse.Price.ToString() + "€" + "/" + currentCourse.Duration + "min";
                 }
             }
             dataHowMeetus = miMock.Vias();
 
         }
+ 
         private void ReturnForm(FormClass form, int pass)
         {
 
@@ -93,6 +140,7 @@ namespace EnglishAcademyProject.Components.Pages
 
                     stepForm = 1;
                     mainTitle = "Datos de Contacto";
+                    NavigationNext();
                 }
                 else
                     await emptyForm.ShowAsync();
@@ -104,6 +152,7 @@ namespace EnglishAcademyProject.Components.Pages
                 {
                     stepForm = 2;
                     mainTitle = "Datos de interés y condiciones legales";
+                    NavigationNext();
                 }
                 else
                 {
@@ -117,6 +166,7 @@ namespace EnglishAcademyProject.Components.Pages
                 {
                     stepForm = 3;
                     mainTitle = "Datos Bancarios";
+                    NavigationNext();
                 }
                 else
                 {
@@ -126,63 +176,72 @@ namespace EnglishAcademyProject.Components.Pages
 
             else if(pass == 3)
             {
-                SendEmail("guilleprieto08@gmail.com", "Bienvenido a Academia Sevilla Este", $"Bienvenido {form.nameparent} a Academias Sevilla este, el registro de su hijo/a {form.sonsName} al curso de {selectedCourse} ha sido completado correctamente");
+
+                if((enableMonth || enableQuarter || enableAnnual) && (form.bank || form.other) && form.privacyPolicy)
+                {
+                    if(form.bank)
+                    {
+                        if(!System.String.IsNullOrEmpty(form.iban))
+                        {
+                            loading = true;
+
+                            var result = await Task.Run(SendEmail);
+                            if(result)
+                            {
+                                loading = false;
+                                await emailSuccessfully.ShowAsync();
+                                navigationManager.NavigateTo("/");
+                            }
+                            else
+                            {
+                                loading = true;
+                            }
+                        }
+                        else
+                        {
+                            await emptyForm.ShowAsync();
+                        }
+                    }
+                    else
+                    {
+                        loading = true;
+
+                        var result = await Task.Run(SendEmail);
+                        if(result)
+                        {
+                            loading = false;
+                            await emailSuccessfully.ShowAsync();
+                            navigationManager.NavigateTo("/");
+                        }
+                        else
+                        {
+                            loading = true;
+                        }
+                    }
+
+
+                }
+                else
+                {
+                    await emptyForm.ShowAsync();
+                }
+
             }
             else
             {
                 stepForm = 0;
-            }
-            navigationManager.NavigateTo($"form/{CourseId.ToString()}/{NameCourse}");
-
-        }
-
-
-        private void ReviewChecksMonthPayment()
-        {
-            if(form.monthlyPayment)
-            {
-                enableMonth = true;
-                enableQuarter = false;
-                enableAnnual = false;
-
+                NavigationNext();
             }
 
         }
-        private void ReviewChecksQuarterPayment()
+
+        public bool SendEmail()
         {
 
-            if(form.quarterlyPayment)
-            {
-                enableAnnual = false;
-                enableMonth = false;
-                enableQuarter = true;
-            }
+            bool result = false;
+            string toAddress = form.email; // Dirección de correo electrónico del destinatario
+            string subject = "¡Bienvenido a Academia Sevilla Este!"; // Asunto del correo electrónico
 
-
-        }
-        private void ReviewChecksAnnualPayment()
-        {
-
-            if(form.annualPayment)
-            {
-                enableAnnual = true;
-                enableMonth = false;
-                enableQuarter = false;
-            }
-        }
-        private void ReviewChecksPayment()
-        {
-
-
-            enableAnnual = true;
-            enableMonth = true;
-            enableQuarter = true;
-
-        }
-
-
-        public void SendEmail(string toAddress, string subject, string body)
-        {
             // Configuración del servidor SMTP
             string smtpHost = "smtp.gmail.com"; // Cambia esto por el host de tu servidor SMTP
             int smtpPort = 587; // Puerto del servidor SMTP (generalmente 587 o 25)
@@ -278,7 +337,7 @@ namespace EnglishAcademyProject.Components.Pages
 		<TH>Información a tener en cuenta</TH> <TH>¿Otras persona para recoger al niño/a?</TH> <TH>Método de pago</TH> <TH>Forma de pago</TH> <TH> {SelectTitleIban(form.bank)} </TH> <TH>¿Otro titular de la cuenta??</TH><TH>Aviso legal y política de privacidad</TH>
 	</TR>
 	<TR>
-		<TD class='align'>{TrueToYes(form.additionalInformation)}</TD> <TD class='align'>{form.morePeople}</TD> <TD class='align'>{SelectPaymentAnswer(form.monthlyPayment, form.quarterlyPayment, form.annualPayment)}</TD><TD class='align'>{SelectMethodPayment(form.bank, form.other)}</TD><TD>{SelectIban(form.bank)}</TD><TD class='align'>{SelectOtherHolder(form.anotherHolder)}</TD> <TD class='align'>{TrueToYes(form.privacyPolicy.ToString())}</TD>
+		<TD class='align'>{TrueToYes(form.additionalInformation)}</TD> <TD class='align'>{form.morePeople}</TD> <TD class='align'>{SelectPaymentAnswer(enableMonth,enableQuarter, enableAnnual)}</TD><TD class='align'>{SelectMethodPayment(form.bank, form.other)}</TD><TD>{SelectIban(form.bank)}</TD><TD class='align'>{SelectOtherHolder(form.anotherHolder)}</TD> <TD class='align'>{TrueToYes(form.privacyPolicy.ToString())}</TD>
 	</TR>
 </TABLE>
 
@@ -295,14 +354,17 @@ namespace EnglishAcademyProject.Components.Pages
             client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
             client.EnableSsl = true; // Habilitar SSL si el servidor SMTP lo requiere
 
-
             try
             {
                 // Envío del correo
                 client.Send(message);
                 client.UseDefaultCredentials = false;
+                result = true;
+                //loading = false;
+                //emailSuccessfully.ShowAsync();
+                //InvokeAsync(StateHasChanged);
 
-                emailSuccessfully.ShowAsync();
+
             }
             catch(Exception ex)
             {
@@ -314,6 +376,7 @@ namespace EnglishAcademyProject.Components.Pages
                 message.Dispose();
                 client.Dispose();
             }
+            return result;
         }
 
         private string TrueToYes(string value)
@@ -323,7 +386,7 @@ namespace EnglishAcademyProject.Components.Pages
                 value = "Sí";
             }
             else
-            {        
+            {
                 value = "No";
             }
             return value;
@@ -350,7 +413,7 @@ namespace EnglishAcademyProject.Components.Pages
             string answer = "";
             if(bank)
             {
-                answer = "Domiciliación Bancaria";
+                answer = "Cargo a Cuenta";
             }
             else if(other)
             {
@@ -367,10 +430,10 @@ namespace EnglishAcademyProject.Components.Pages
             }
             else
             {
-                answer = "No se ha seleccionado domiciliación bancaria";
+                answer = "Efectivo";
             }
             return answer;
-        }   
+        }
         private string SelectTitleIban(bool bank)
         {
             string answer = "";
@@ -380,7 +443,7 @@ namespace EnglishAcademyProject.Components.Pages
             }
             else
             {
-                answer = "No se ha seleccionado domiciliación bancaria";
+                answer = "Domiciliación bancaria";
             }
             return answer;
         }
@@ -397,5 +460,11 @@ namespace EnglishAcademyProject.Components.Pages
             }
             return answer;
         }
+
+        private void NavigationNext()
+        {
+            navigationManager.NavigateTo($"form/{CourseId.ToString()}/{NameCourse}");
+        }
+
     }
 }

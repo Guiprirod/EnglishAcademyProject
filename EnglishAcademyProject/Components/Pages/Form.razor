@@ -80,9 +80,9 @@
                     <HxInputText @bind-Value="@selectedCourse" Enabled="false"></HxInputText>
                 </div>
                 <div class="col-sm-6">
-                    <h5 style="text-align:center">Precio del curso </h5>
+                    <h5 style="text-align:center">Precio y duración del curso </h5>
 
-                    <HxInputText TValue="int" @bind-Value="@price" Enabled="false"></HxInputText>
+                    <HxInputText TValue="int" @bind-Value="@(course)" Enabled="false"></HxInputText>
 
                 </div>
             </div>
@@ -429,118 +429,121 @@
             }
             @if(stepForm == 3)
             {
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-4" style="text-align:end">
-                                <HxIcon Icon="BootstrapIcon.InfoCircleFill" CssClass="icon"></HxIcon>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 style="text-align:left !important">Información a tener en cuenta(situación familiar, etc.)</h3>
-                            </div>
-                        </div>
-
-                        <HxInputTextArea @bind-Value="@form.additionalInformation"></HxInputTextArea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12" style="text-align:center;">
-                        <div class="row">
-                            <div class="col-sm-3" style="text-align:end">
-                                <HxIcon Icon="BootstrapIcon.PeopleFill" CssClass="icon"></HxIcon>
-
-                            </div>
-                            <div class="col-sm-9">
-
-                                <h3>Personas que pueden recoger de clase a mi hijo/a (nombre/parentesco) *</h3>
-                            </div>
-                        </div>
-
-                        <HxInputTextArea @bind-Value="@form.morePeople"></HxInputTextArea>
-                        <br />
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-1">
-                        <HxIcon CssClass="icon" Icon="BootstrapIcon.ExclamationCircleFill"></HxIcon>
-                    </div>
-                    <div class="col-sm-11">
-                        <h3><strong>Se ruega informar antes de la clase si alguien distinto de los padres/tutores legales pasará a recoger al/el menor)</strong></h3>
-
-                    </div>
-
-                </div>
-                <div class="row" style="padding-top:2rem !important; text-align:center !important">
-                    <br>
-                    <h2>Método de pago</h2>
-                    <hr>
-
-                    <div class="col-sm-4">
-                        <HxCheckbox Text="Pago Mensual" @bind-Value="form.monthlyPayment" Inline=true Enabled="@enableMonth" ></HxCheckbox>
-                    </div><div class="col-sm-4">
-                        <HxCheckbox Text="Pago Trimestral (5% dto. por trimestre)" @bind-Value="form.quarterlyPayment" Inline=true Enabled="@enableQuarter"></HxCheckbox>
-                    </div><div class="col-sm-4">
-                        <HxCheckbox Text="Pago Anual (10% dto. anual)" @bind-Value="form.annualPayment" Inline=true Enabled="@enableAnnual"></HxCheckbox>
-                    </div>
-                    @if(form.monthlyPayment)
-                    {
-                        ReviewChecksMonthPayment();
-                    }
-                    @if(form.quarterlyPayment)
-                    {
-                        ReviewChecksQuarterPayment();
-                    }
-                    @if(form.annualPayment)
-                    {
-                        ReviewChecksAnnualPayment();
-                    }
-                    @if(form.monthlyPayment == false && form.quarterlyPayment == false && form.annualPayment == false) { ReviewChecksPayment(); }
-                </div>
-                <div class="row" style="padding-top:2rem !important; text-align:center !important">
-                    <br>
-                    <h2>Forma de pago</h2>
-                    <hr>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxCheckbox Text="Cargo a cuenta" @bind-Value="form.bank" Inline=true></HxCheckbox>
-
-                    </div>
-                    <div class="col-sm-6" style="text-align:center;">
-                        <HxCheckbox Text="Otro" @bind-Value="form.other" Inline=true></HxCheckbox>
-
-                    </div>
-                </div>
-                @if(form.bank)
+                @if(loading)
                 {
                     <div class="row">
+                        <div class="col-sm-12" style="text-align:center">
+                            <HxSpinner Size="SpinnerSize.Regular" Color="ThemeColor.Primary" />
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+                    <div class="row">
                         <div class="col-sm-12">
-                            <HxInputText @bind-Value="@form.iban" Label="Introduzca el número de cuenta corriente:"></HxInputText>
+                            <div class="row">
+                                <div class="col-sm-4" style="text-align:end">
+                                    <HxIcon Icon="BootstrapIcon.InfoCircleFill" CssClass="icon"></HxIcon>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h3 style="text-align:left !important">Información a tener en cuenta(situación familiar, etc.)</h3>
+                                </div>
+                            </div>
+
+                            <HxInputTextArea @bind-Value="@form.additionalInformation"></HxInputTextArea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align:center;">
+                            <div class="row">
+                                <div class="col-sm-3" style="text-align:end">
+                                    <HxIcon Icon="BootstrapIcon.PeopleFill" CssClass="icon"></HxIcon>
+
+                                </div>
+                                <div class="col-sm-9">
+
+                                    <h3>Personas que pueden recoger de clase a mi hijo/a (nombre/parentesco)</h3>
+                                </div>
+                            </div>
+
+                            <HxInputTextArea @bind-Value="@form.morePeople"></HxInputTextArea>
+                            <br />
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <HxIcon CssClass="icon" Icon="BootstrapIcon.ExclamationCircleFill"></HxIcon>
+                        </div>
+                        <div class="col-sm-11">
+                            <h3><strong>Se ruega informar antes de la clase si alguien distinto de los padres/tutores legales pasará a recoger al/el menor)</strong></h3>
+
                         </div>
 
                     </div>
+                    <div class="row" style="padding-top:2rem !important; text-align:center !important">
+                        <br>
+                        <h2>Método de pago *</h2>
+                        <hr>
+
+                        <div class="col-sm-4">
+                            <HxCheckbox Text="Pago Mensual" @bind-Value="enableMonth" Inline=true Disabled="enableQuarter || enableAnnual" ></HxCheckbox>
+                        </div><div class="col-sm-4">
+                            <HxCheckbox Text="Pago Trimestral (5% dto. por trimestre)" @bind-Value="enableQuarter" Inline=true Disabled="enableMonth || enableAnnual"></HxCheckbox>
+                        </div><div class="col-sm-4">
+                            <HxCheckbox Text="Pago Anual (10% dto. anual)" @bind-Value="enableAnnual" Inline=true Disabled="enableMonth || enableQuarter" ></HxCheckbox>
+                        </div>
+
+                    </div>
+                    <div class="row" style="padding-top:2rem !important; text-align:center !important">
+                        <br>
+                        <h2>Forma de pago *</h2>
+                        <hr>
+                        <div class="col-sm-6" style="text-align:center;">
+                            <HxCheckbox Text="Cargo a cuenta" @bind-Value="form.bank" Inline=true></HxCheckbox>
+
+                        </div>
+                        <div class="col-sm-6" style="text-align:center;">
+                            <HxCheckbox Text="Otro" @bind-Value="form.other" Inline=true></HxCheckbox>
+
+                        </div>
+                    </div>
+                    @if(form.bank)
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <HxInputText @bind-Value="@form.iban" Label="Introduzca el número de cuenta corriente: *"></HxInputText>
+                            </div>
+
+                        </div>
+                    }
+                    <div class="row" style="padding-top:1rem !important;">
+                        <div class="col-sm-12">
+                            <HxInputText @bind-Value="@form.anotherHolder" Label="En el caso de que el titular de la cuenta sea distinto del padre/madre/tutor legal, indique nombre y apellidos del titular:"></HxInputText>
+                        </div>
+
+                    </div>
+                    <div class="row" style="padding: 1rem !important;">
+                        <div class="col-sm-12">
+                            <HxCheckbox Text="Acepto el aviso legal y la política de privacidad *" @bind-Value="@form.privacyPolicy" Inline=true></HxCheckbox>
+                        </div>
+                    </div>
+
+                    <div class="row" style="text-align:center">
+
+                        <div class="col-sm-6">
+                            <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,3)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
+                        </div>
+                        <div class="col-sm-6">
+                            <HxButton Text="Completar registro" OnClick="async () => SendForm(form, 3)" Color="ThemeColor.Warning" />
+                        </div>
+                    </div>
                 }
-                <div class="row" style="padding-top:1rem !important;">
-                    <div class="col-sm-12">
-                        <HxInputText @bind-Value="@form.anotherHolder" Label="En el caso de que el titular de la cuenta sea distinto del padre/madre/tutor legal, indique nombre y apellidos del titular:"></HxInputText>
-                    </div>
 
-                </div>
-                <div class="row" style="padding: 1rem !important;">
-                    <div class="col-sm-12">
-                        <HxCheckbox Text="Acepto el aviso legal y la política de privacidad *" @bind-Value="@form.privacyPolicy" Inline=true></HxCheckbox>
-                    </div>
-                </div>
-
-                <div class="row" style="text-align:center">
-                    <div class="col-sm-6">
-                        <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,3)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
-                    </div>
-                    <div class="col-sm-6">
-                        <HxSubmit Text="Siguiente" Color="ThemeColor.Primary" OnClick="() =>SendForm(form,3)" Icon="BootstrapIcon.ArrowRight"></HxSubmit>
-                    </div>
-                </div>
             }
+
 
         </div>
 
@@ -647,14 +650,12 @@
         <HxButton Text="Confirmar" OnClick=" () => emptyForm.HideAsync()" Color="ThemeColor.Primary" />
     </FooterTemplate>
 </HxModal>
-<HxModal @ref="emailSuccessfully" Centered="true" Title="¡Bienvenido!">
+<HxModal @ref="emailSuccessfully" Centered="true" Title="¡Registro compleado con éxito!">
 
     <BodyTemplate>
         <HxAlert Color="ThemeColor.Success">El email ha sido enviado correctamente.</HxAlert>
     </BodyTemplate>
-    <FooterTemplate>
-        <HxButton Text="Confirmar" OnClick=" () => emailSuccessfully.HideAsync()" Color="ThemeColor.Primary" />
-    </FooterTemplate>
+
 </HxModal>
 
 
