@@ -43,7 +43,7 @@ namespace EnglishAcademyProject.Components.Pages
                 if(value)
                 {
                     enableQuarter = false;
-                    enableAnnual = false;            
+                    enableAnnual = false;
 
                 }
             }
@@ -76,10 +76,36 @@ namespace EnglishAcademyProject.Components.Pages
                 }
             }
         }
+        private bool enableBank
+        {
+            get => _enableBank;
+            set
+            {
+                _enableBank = value;
+                if(value)
+                {
+                    enableOther = false;
+                }
+            }
+        }
+        private bool enableOther
+        {
+            get => _enableOther;
+            set
+            {
+                _enableOther = value;
+                if(value)
+                {
+                    enableBank = false;
+                }
+            }
+        }
 
         private bool _enableMonth;
         private bool _enableQuarter;
         private bool _enableAnnual;
+        private bool _enableBank;
+        private bool _enableOther;
 
 
         protected override async Task OnInitializedAsync()
@@ -105,7 +131,7 @@ namespace EnglishAcademyProject.Components.Pages
             dataHowMeetus = miMock.Vias();
 
         }
- 
+
         private void ReturnForm(FormClass form, int pass)
         {
 
@@ -177,9 +203,9 @@ namespace EnglishAcademyProject.Components.Pages
             else if(pass == 3)
             {
 
-                if((enableMonth || enableQuarter || enableAnnual) && (form.bank || form.other) && form.privacyPolicy)
+                if((enableMonth || enableQuarter || enableAnnual) && (enableBank || enableOther) && form.privacyPolicy)
                 {
-                    if(form.bank)
+                    if(enableBank)
                     {
                         if(!System.String.IsNullOrEmpty(form.iban))
                         {
@@ -334,10 +360,10 @@ namespace EnglishAcademyProject.Components.Pages
 		<TH COLSPAN=7><strong>Datos Bancarios</strong></TH>
 	</TR>
 	<TR>
-		<TH>Información a tener en cuenta</TH> <TH>¿Otras persona para recoger al niño/a?</TH> <TH>Método de pago</TH> <TH>Forma de pago</TH> <TH> {SelectTitleIban(form.bank)} </TH> <TH>¿Otro titular de la cuenta??</TH><TH>Aviso legal y política de privacidad</TH>
+		<TH>Información a tener en cuenta</TH> <TH>¿Otras persona para recoger al niño/a?</TH> <TH>Método de pago</TH> <TH>Forma de pago</TH> <TH> {SelectTitleIban(enableBank)} </TH> <TH>¿Otro titular de la cuenta??</TH><TH>Aviso legal y política de privacidad</TH>
 	</TR>
 	<TR>
-		<TD class='align'>{TrueToYes(form.additionalInformation)}</TD> <TD class='align'>{form.morePeople}</TD> <TD class='align'>{SelectPaymentAnswer(enableMonth,enableQuarter, enableAnnual)}</TD><TD class='align'>{SelectMethodPayment(form.bank, form.other)}</TD><TD>{SelectIban(form.bank)}</TD><TD class='align'>{SelectOtherHolder(form.anotherHolder)}</TD> <TD class='align'>{TrueToYes(form.privacyPolicy.ToString())}</TD>
+		<TD class='align'>{TrueToYes(form.additionalInformation)}</TD> <TD class='align'>{form.morePeople}</TD> <TD class='align'>{SelectPaymentAnswer(enableMonth, enableQuarter, enableAnnual)}</TD><TD class='align'>{SelectMethodPayment(enableBank, enableOther)}</TD><TD>{SelectIban(enableBank)}</TD><TD class='align'>{SelectOtherHolder(form.anotherHolder)}</TD> <TD class='align'>{TrueToYes(form.privacyPolicy.ToString())}</TD>
 	</TR>
 </TABLE>
 

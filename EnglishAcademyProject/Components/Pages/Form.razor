@@ -502,15 +502,15 @@
                         <h2>Forma de pago *</h2>
                         <hr>
                         <div class="col-sm-6" style="text-align:center;">
-                            <HxCheckbox Text="Cargo a cuenta" @bind-Value="form.bank" Inline=true></HxCheckbox>
+                            <HxCheckbox Text="Cargo a cuenta" @bind-Value="enableBank" Inline=true></HxCheckbox>
 
                         </div>
                         <div class="col-sm-6" style="text-align:center;">
-                            <HxCheckbox Text="Otro" @bind-Value="form.other" Inline=true></HxCheckbox>
+                            <HxCheckbox Text="Otro" @bind-Value="enableOther" Inline=true></HxCheckbox>
 
                         </div>
                     </div>
-                    @if(form.bank)
+                    @if(enableBank)
                     {
                         <div class="row">
                             <div class="col-sm-12">
@@ -537,7 +537,7 @@
                             <HxSubmit Text="Retroceder" Color="ThemeColor.Danger" OnClick="() =>ReturnForm(form,3)" Icon="BootstrapIcon.ArrowLeft"></HxSubmit>
                         </div>
                         <div class="col-sm-6">
-                            <HxButton Text="Completar registro" OnClick="async () => SendForm(form, 3)" Color="ThemeColor.Warning" />
+                            <HxButton Text="Completar registro" OnClick="async () => SendForm(form, 3)" Color="ThemeColor.Warning" Icon="BootstrapIcon.EnvelopeCheck"/>
                         </div>
                     </div>
                 }
