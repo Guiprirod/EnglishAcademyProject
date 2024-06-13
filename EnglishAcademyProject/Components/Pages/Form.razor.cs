@@ -161,7 +161,7 @@ namespace EnglishAcademyProject.Components.Pages
         {
             if(pass == 0)
             {
-                if(!System.String.IsNullOrEmpty(form.sonsName) && !System.String.IsNullOrEmpty(form.preferenceDay) && !System.String.IsNullOrEmpty(form.preferenceSchedule) && !System.String.IsNullOrEmpty(form.sonsBirthday.ToShortDateString()))
+                if(!System.String.IsNullOrEmpty(form.sonsName) && !System.String.IsNullOrEmpty(form.preferenceDay) && !System.String.IsNullOrEmpty(form.preferenceSchedule) && !form.sonsBirthday.ToShortDateString().Equals("1/1/0001")  )
                 {
 
                     stepForm = 1;
@@ -331,7 +331,7 @@ namespace EnglishAcademyProject.Components.Pages
 
 <TABLE BORDER>
 	<TR>
-		<TH COLSPAN=6><strong>Datos de Contacto</strong></TH>
+		<TH COLSPAN=8><strong>Datos de Contacto</strong></TH>
 	</TR>
 	<TR>
 		<TH>Nombre y apellidos del tutor legal</TH> <TH>NIF/NIE</TH> <TH>Teléfono tutor legal</TH> <TH>Correo electrónico</TH> <TH>Dirección</TH><TH>Ciudad</TH> <TH>Provincia</TH> <TH>Código Postal</TH> 
