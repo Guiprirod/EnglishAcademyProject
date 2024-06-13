@@ -367,7 +367,7 @@ namespace EnglishAcademyProject.Components.Pages
 		<TH>Información a tener en cuenta</TH> <TH>¿Otras persona para recoger al niño/a?</TH> <TH>Método de pago</TH> <TH>Forma de pago</TH> <TH> {SelectTitleIban(enableBank)} </TH> <TH>¿Otro titular de la cuenta??</TH><TH>Aviso legal y política de privacidad</TH>
 	</TR>
 	<TR>
-		<TD class='align'>{TrueToYes(form.additionalInformation)}</TD> <TD class='align'>{form.morePeople}</TD> <TD class='align'>{SelectPaymentAnswer(enableMonth, enableQuarter, enableAnnual)}</TD><TD class='align'>{SelectMethodPayment(enableBank, enableOther)}</TD><TD>{SelectIban(enableBank)}</TD><TD class='align'>{SelectOtherHolder(form.anotherHolder)}</TD> <TD class='align'>{TrueToYes(form.privacyPolicy.ToString())}</TD>
+		<TD class='align'>{TrueToYes(form.additionalInformation)}</TD> <TD class='align'>{SelectMorePeople(form.morePeople)}</TD> <TD class='align'>{SelectPaymentAnswer(enableMonth, enableQuarter, enableAnnual)}</TD><TD class='align'>{SelectMethodPayment(enableBank, enableOther)}</TD><TD class='align'>{SelectIban(enableBank)}</TD><TD class='align'>{SelectOtherHolder(form.anotherHolder)}</TD> <TD class='align'>{TrueToYes(form.privacyPolicy.ToString())}</TD>
 	</TR>
 </TABLE>
             <br>
@@ -489,6 +489,19 @@ namespace EnglishAcademyProject.Components.Pages
             else
             {
                 answer = form.anotherHolder;
+            }
+            return answer;
+        }
+         private string SelectMorePeople(string morePeople)
+        {
+            string answer = "";
+            if(System.String.IsNullOrEmpty(morePeople))
+            {
+                answer = "No";
+            }
+            else
+            {
+                answer = morePeople;
             }
             return answer;
         }
