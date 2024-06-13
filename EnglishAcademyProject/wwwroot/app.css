@@ -24,8 +24,7 @@ body {
         background-attachment: fixed;
     }
 }
-
-a, .btn-link {
+.btn-link {
     color: #006bb7;
 }
 

@@ -161,7 +161,7 @@ namespace EnglishAcademyProject.Components.Pages
         {
             if(pass == 0)
             {
-                if(!System.String.IsNullOrEmpty(form.sonsName) && !System.String.IsNullOrEmpty(form.preferenceDay) && !System.String.IsNullOrEmpty(form.preferenceSchedule) && !form.sonsBirthday.ToShortDateString().Equals("1/1/0001")  )
+                if(!System.String.IsNullOrEmpty(form.sonsName) && !System.String.IsNullOrEmpty(form.preferenceDay) && !System.String.IsNullOrEmpty(form.preferenceSchedule) && !form.sonsBirthday.ToShortDateString().Equals("1/1/0001"))
                 {
 
                     stepForm = 1;
@@ -326,7 +326,10 @@ namespace EnglishAcademyProject.Components.Pages
 		<TD class='align'>{form.sonsName}</TD> <TD class='align'>{form.sonsBirthday.ToShortDateString()}</TD> <TD  class='align'>{form.schoolYear}</TD><TD class='align'>{form.preferenceDay}</TD><TD class='align'>{form.preferenceSchedule}</TD><TD class='align'>{TrueToYes(form.paid.ToString())}</TD> 
 	</TR>
 </TABLE>
+
+
             <br>
+
 
 
 <TABLE BORDER>
@@ -340,6 +343,8 @@ namespace EnglishAcademyProject.Components.Pages
 		<TD class='align'>{form.nameparent}</TD> <TD class='align'>{form.nationalId}</TD> <TD class='align'>{form.phoneNumber}</TD><TD class='align'>{form.email}</TD><TD class='align'>{form.address}</TD><TD class='align'>{form.city}</TD> <TD class='align'>{form.province}</TD> <TD class='align'>{form.cp}</TD> 
 	</TR>
 </TABLE>
+
+
             <br>
 
 <TABLE BORDER>
@@ -354,7 +359,6 @@ namespace EnglishAcademyProject.Components.Pages
 	</TR>
 </TABLE>
             <br>
-
 <TABLE BORDER>
 	<TR>
 		<TH COLSPAN=7><strong>Datos Bancarios</strong></TH>
@@ -366,9 +370,11 @@ namespace EnglishAcademyProject.Components.Pages
 		<TD class='align'>{TrueToYes(form.additionalInformation)}</TD> <TD class='align'>{form.morePeople}</TD> <TD class='align'>{SelectPaymentAnswer(enableMonth, enableQuarter, enableAnnual)}</TD><TD class='align'>{SelectMethodPayment(enableBank, enableOther)}</TD><TD>{SelectIban(enableBank)}</TD><TD class='align'>{SelectOtherHolder(form.anotherHolder)}</TD> <TD class='align'>{TrueToYes(form.privacyPolicy.ToString())}</TD>
 	</TR>
 </TABLE>
-
+            <br>
 <br>
-            <a href='{"urlBoton"}' class='button'>Visitar Sitio</a>
+
+<a href='{"https://www.google.com/maps/place/Helen+Doron+English+Sevilla+Este/37.3967957,-5.9223138,17z/data=!3m1!4b1!4m6!3m5!1s0xd126f37a0415b1d:0xbd93e08a33646bf9!8m2!3d37.3967957!4d-5.9223138!16s%2Fg%2F1pp2vmy5m?entry=ttu"}' target='_blank' class='button'>Visitar Sitio</a>
+
         </body>
         </html>";
 
